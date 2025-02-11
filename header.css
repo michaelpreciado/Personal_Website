@@ -216,34 +216,160 @@
 
 @media (max-width: 768px) {
     .sidebar {
-        padding: 1.5rem;
+        width: 100%;
+        max-width: 100%;
+        right: -100%;
+        top: 0;
+        height: 100%;
+        padding: 2rem 1rem;
+        z-index: 1001;
+    }
+
+    .sidebar.active {
+        right: 0;
+        transform: translateX(0);
     }
 
     .contact-section {
-        margin-top: 2rem;
+        margin-top: 4rem;
     }
 
-    .contact-section h2 {
-        font-size: 1.5rem;
+    .contact-info {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
     }
 
     .contact-item {
-        padding: 0.8rem;
+        width: 100%;
+        padding: 1rem;
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        background: rgba(0, 30, 35, 0.95);
+        border: 1px solid var(--term-cyan);
+        border-radius: 8px;
     }
 
-    .hamburger-menu {
-        padding: 0.6rem;
-        min-width: 40px;
-        min-height: 40px;
+    .contact-item i {
+        font-size: 1.2rem;
+        min-width: 24px;
     }
 
-    .hamburger-menu span {
-        font-size: 0.8rem;
+    .contact-item span {
+        margin-left: 0.75rem;
+    }
+
+    .close-sidebar {
+        position: fixed;
+        top: 1rem;
+        right: 1rem;
+        width: 44px;
+        height: 44px;
+        background: rgba(0, 30, 35, 0.95);
+        z-index: 1002;
+    }
+}
+
+@media (max-width: 480px) {
+    .back-to-home {
+        position: fixed;
+        top: 0.5rem;
+        left: 0.5rem;
+        width: 44px;
+        height: 44px;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0, 30, 35, 0.95);
+        border: 1px solid var(--term-cyan);
+        border-radius: 8px;
+        z-index: 1002;
+    }
+
+    .back-to-home span {
+        display: none;
     }
 
     .back-to-home i {
         font-size: 1.2rem;
+        margin: 0;
     }
+
+    .hamburger-menu {
+        position: fixed;
+        top: 0.5rem;
+        right: 0.5rem;
+        width: 44px;
+        height: 44px;
+        padding: 0;
+        z-index: 1002;
+    }
+
+    .hamburger-menu span {
+        display: none;
+    }
+
+    .contact-section h2 {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .contact-item {
+        padding: 0.75rem;
+        font-size: 0.9rem;
+    }
+
+    .location-info {
+        margin-top: 1.5rem;
+    }
+
+    .location-info p {
+        font-size: 0.9rem;
+    }
+}
+
+/* Ensure sidebar works on iOS */
+.sidebar {
+    -webkit-overflow-scrolling: touch;
+    overflow-y: auto;
+}
+
+.sidebar-open {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* Improve touch targets */
+.contact-item, .back-to-home, .hamburger-menu {
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Add active states for better touch feedback */
+.contact-item:active,
+.back-to-home:active,
+.hamburger-menu:active {
+    transform: scale(0.98);
+    background: rgba(0, 230, 255, 0.15);
+}
+
+/* Fix iOS scrolling issues */
+.sidebar-content {
+    min-height: 101%;
+    padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Ensure buttons stay above content */
+.back-to-home,
+.hamburger-menu,
+.close-sidebar {
+    position: fixed;
+    z-index: 1002;
 }
 
 /* Close button enhancement */
@@ -481,6 +607,4 @@ body.sidebar-open {
 .sidebar::-webkit-scrollbar {
     width: 0;
     background: transparent;
-}
-
-{{ necessary_changes }} 
+} 
