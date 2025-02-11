@@ -30,9 +30,10 @@
 /* Links Section */
 .links-section {
     width: 100%;
-    max-width: 400px; /* Match the width of project cards */
+    max-width: 400px;
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 12px;
     margin: 0 auto;
 }
@@ -49,6 +50,7 @@
     width: 100%;
     position: relative;
     overflow: hidden;
+    text-align: center;
 }
 
 /* Profile Section */
@@ -56,7 +58,7 @@
     text-align: center;
     margin-bottom: 32px;
     width: 100%;
-    max-width: 400px; /* Match the width of project cards */
+    max-width: 400px;
     padding: 0;
     display: flex;
     flex-direction: column;
@@ -108,73 +110,52 @@
 /* Mobile Optimizations */
 @media (max-width: 768px) {
     .linktree-container {
-        padding: calc(env(safe-area-inset-top) + 24px) 16px calc(env(safe-area-inset-bottom) + 24px);
+        padding: 16px;
     }
-
-    .profile-section {
-        padding: 0 16px;
-    }
-
-    .profile-image {
-        width: 80px;
-        height: 80px;
-        margin-bottom: 32px; /* Increased spacing on mobile */
-    }
-
-    .profile-image img {
-        width: 80px;
-        height: 80px;
-    }
-
-    .profile-section h1 {
-        padding-top: 12px; /* More padding on mobile */
-    }
-
+    
     .profile-section,
     .links-section {
-        max-width: 350px; /* Slightly smaller on mobile */
+        max-width: 350px;
     }
-
+    
     .project-card {
         padding: 16px;
     }
-
-    #particles-js {
-        opacity: 0.4;
+    
+    .project-title {
+        font-size: 20px;
+    }
+    
+    .project-description {
+        font-size: 14px;
     }
 }
 
 @media (max-width: 480px) {
     .linktree-container {
-        padding: calc(env(safe-area-inset-top) + 16px) 12px calc(env(safe-area-inset-bottom) + 16px);
+        padding: 12px;
     }
-
-    .profile-section {
-        padding: 0 12px;
-    }
-
-    .profile-image {
-        width: 72px;
-        height: 72px;
-        margin-bottom: 36px; /* Even more spacing on smallest screens */
-    }
-
-    .profile-image img {
-        width: 72px;
-        height: 72px;
-    }
-
-    .profile-section h1 {
-        padding-top: 16px; /* More padding on smallest screens */
-    }
-
+    
     .profile-section,
     .links-section {
-        max-width: 300px; /* Even smaller on mobile */
+        max-width: 300px;
     }
-
+    
     .project-card {
         padding: 14px;
+    }
+    
+    .project-title {
+        font-size: 18px;
+    }
+    
+    .project-description {
+        font-size: 13px;
+    }
+    
+    .contact-button {
+        padding: 10px 20px;
+        font-size: 14px;
     }
 }
 
@@ -202,28 +183,32 @@
 .project-content {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 12px;
     width: 100%;
 }
 
 .project-title {
-    font-size: 18px;
+    font-size: 24px;
     color: var(--term-cyan-bright);
-    margin: 0;
-    text-shadow: var(--term-glow);
+    margin: 0 0 8px;
+    text-align: center;
+    width: 100%;
 }
 
 .project-description {
-    font-size: 14px;
+    font-size: 16px;
     color: var(--term-cyan-dim);
-    margin: 0;
-    line-height: 1.5;
+    margin: 0 0 20px;
+    text-align: center;
+    width: 100%;
 }
 
 .project-tags {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
+    justify-content: center;
     margin-top: 4px;
 }
 
@@ -239,7 +224,9 @@
 .project-links {
     display: flex;
     gap: 12px;
+    justify-content: center;
     margin-top: 8px;
+    width: 100%;
 }
 
 .project-link {
@@ -980,4 +967,21 @@
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+/* Back to Home Button */
+.contact-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: 24px auto;
+    padding: 12px 24px;
+    background: rgba(0, 18, 21, 0.7);
+    border: 1px solid var(--term-cyan);
+    border-radius: 8px;
+    color: var(--term-cyan);
+    text-decoration: none;
+    transition: all 0.2s ease;
+    width: fit-content;
 }
