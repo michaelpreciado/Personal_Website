@@ -108,28 +108,22 @@
     box-shadow: 0 0 20px var(--term-cyan);
 }
 
-/* Enhanced Sidebar Styles */
+/* Mobile Sidebar Fixes */
 .sidebar {
     position: fixed;
     top: 0;
     right: -100%;
+    width: 100%;
     height: 100vh;
-    width: min(90vw, 400px);
-    z-index: 1001;
-    transform: translateX(100%);
-    transition: transform var(--transition-normal);
-    background: rgba(0, 18, 21, 0.98);
-    border-left: 2px solid var(--term-cyan-bright);
-    padding: 2rem;
+    background: rgba(0, 18, 21, 0.95);
     backdrop-filter: blur(10px);
-    overflow-y: overlay;
+    -webkit-backdrop-filter: blur(10px);
+    transition: transform 0.3s ease-out;
+    transform: translateX(100%);
+    z-index: 2000;
+    overflow-y: auto;
     -webkit-overflow-scrolling: touch;
-    will-change: transform;
-    background-image: linear-gradient(
-        to bottom,
-        rgba(0, 40, 45, 0.95) 0%,
-        rgba(0, 18, 21, 0.98) 100%
-    );
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
 }
 
 .sidebar.active {
@@ -137,25 +131,33 @@
     right: 0;
 }
 
+.sidebar-content {
+    padding: 4rem 1rem 2rem;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.close-sidebar {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    width: 44px;
+    height: 44px;
+    background: rgba(0, 30, 35, 0.95);
+    border: 2px solid var(--term-cyan);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 2001;
+    color: var(--term-cyan);
+    font-size: 1.5rem;
+}
+
 .contact-section {
-    margin-top: 3rem;
-    opacity: 0;
-    transform: translateY(10px);
-    transition: opacity 0.3s ease-out, transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
-}
-
-.sidebar.active .contact-section {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.contact-section h2 {
-    font-size: 1.8rem;
-    color: var(--term-cyan-bright);
-    margin-bottom: 2rem;
-    text-align: center;
-    text-shadow: 0 0 15px rgba(0, 230, 255, 0.5);
-    -webkit-text-stroke: 0.5px var(--term-cyan);
+    margin-top: 2rem;
 }
 
 .contact-info {
@@ -165,46 +167,80 @@
 }
 
 .contact-item {
-    background: rgba(0, 30, 35, 0.95);
-    border: 1px solid var(--term-cyan-bright);
-    border-radius: 12px;
+    width: 100%;
     padding: 1rem;
+    background: rgba(0, 30, 35, 0.95);
+    border: 1px solid var(--term-cyan);
+    border-radius: 8px;
     display: flex;
     align-items: center;
     gap: 1rem;
-    color: var(--term-cyan-bright);
     text-decoration: none;
-    transform: translateX(-10px);
-    opacity: 0;
-    transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
-    will-change: transform, opacity;
-    box-shadow: 0 0 10px rgba(0, 230, 255, 0.2);
+    color: var(--term-cyan);
+    font-size: 1rem;
+    transition: all 0.2s ease;
 }
 
-.sidebar.active .contact-item {
-    transform: translateX(0);
-    opacity: 1;
+.contact-item:active {
+    background: rgba(0, 230, 255, 0.15);
+    transform: scale(0.98);
 }
-
-.sidebar.active .contact-item:nth-child(1) { transition-delay: 0.1s; }
-.sidebar.active .contact-item:nth-child(2) { transition-delay: 0.15s; }
-.sidebar.active .contact-item:nth-child(3) { transition-delay: 0.2s; }
-.sidebar.active .contact-item:nth-child(4) { transition-delay: 0.25s; }
 
 .contact-item i {
-    font-size: 1.5rem;
-    color: var(--term-cyan-bright);
+    font-size: 1.2rem;
+    min-width: 24px;
 }
 
-.contact-item:hover {
-    background: rgba(0, 230, 255, 0.2);
-    transform: translateX(5px);
-    box-shadow: 0 0 15px var(--term-cyan);
+/* Prevent body scroll when sidebar is open */
+body.sidebar-open {
+    position: fixed;
+    width: 100%;
+    overflow: hidden;
 }
 
-.contact-item span {
-    font-weight: 500;
-    text-shadow: 0 0 8px rgba(0, 230, 255, 0.4);
+@media (max-width: 480px) {
+    .sidebar-content {
+        padding: 4rem 1rem 1rem;
+    }
+
+    .contact-section h2 {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+        text-align: center;
+    }
+
+    .contact-item {
+        padding: 0.875rem;
+        font-size: 0.9rem;
+    }
+
+    .contact-item i {
+        font-size: 1.1rem;
+    }
+
+    .close-sidebar {
+        top: 0.75rem;
+        right: 0.75rem;
+        width: 40px;
+        height: 40px;
+    }
+}
+
+/* Improve touch targets */
+.contact-item,
+.close-sidebar {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+
+/* Fix iOS safe area */
+@supports (padding: max(0px)) {
+    .sidebar {
+        padding-top: max(1rem, env(safe-area-inset-top));
+        padding-right: max(1rem, env(safe-area-inset-right));
+        padding-bottom: max(1rem, env(safe-area-inset-bottom));
+        padding-left: max(1rem, env(safe-area-inset-left));
+    }
 }
 
 /* Mobile Optimizations */
@@ -373,24 +409,6 @@
 }
 
 /* Close button enhancement */
-.close-sidebar {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    background: rgba(0, 30, 35, 0.95);
-    border: 2px solid var(--term-cyan-bright);
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
-    will-change: transform;
-    box-shadow: 0 0 8px rgba(0, 230, 255, 0.3);
-}
-
 .close-sidebar:hover {
     background: rgba(0, 230, 255, 0.2);
     transform: rotate(90deg);
@@ -412,14 +430,6 @@
     opacity: 0.3;
     z-index: -1;
     will-change: transform;
-}
-
-.sidebar-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 100%;
-    margin-top: 0;
 }
 
 .location-info {
@@ -607,4 +617,149 @@ body.sidebar-open {
 .sidebar::-webkit-scrollbar {
     width: 0;
     background: transparent;
+}
+
+/* iPhone Optimizations */
+@supports (-webkit-touch-callout: none) {
+    .sidebar {
+        height: -webkit-fill-available;
+        padding-top: max(2rem, env(safe-area-inset-top));
+        padding-bottom: max(2rem, env(safe-area-inset-bottom));
+        padding-right: env(safe-area-inset-right);
+        padding-left: env(safe-area-inset-left);
+    }
+
+    .main-header {
+        padding-top: env(safe-area-inset-top);
+        height: calc(60px + env(safe-area-inset-top));
+    }
+
+    .close-sidebar {
+        top: max(1rem, env(safe-area-inset-top));
+        right: max(1rem, env(safe-area-inset-right));
+    }
+
+    .hamburger-menu {
+        top: max(0.5rem, env(safe-area-inset-top));
+        right: max(0.5rem, env(safe-area-inset-right));
+    }
+
+    .back-to-home {
+        top: max(0.5rem, env(safe-area-inset-top));
+        left: max(0.5rem, env(safe-area-inset-left));
+    }
+}
+
+/* Improved Mobile Styles */
+@media (max-width: 480px) {
+    .sidebar {
+        width: 100%;
+        max-width: 100%;
+        background: rgba(0, 18, 21, 0.98);
+    }
+
+    .sidebar-content {
+        padding: calc(env(safe-area-inset-top) + 4rem) 1rem env(safe-area-inset-bottom);
+    }
+
+    .contact-item {
+        min-height: 44px;
+        padding: 0.8rem 1rem;
+        margin: 0.3rem 0;
+        border-radius: 12px;
+        -webkit-touch-callout: none;
+        font-size: 1rem;
+    }
+
+    .contact-item:active {
+        transform: scale(0.98);
+        transition: transform 0.1s ease;
+    }
+
+    .contact-section h2 {
+        margin-bottom: 1.2rem;
+        font-size: 1.4rem;
+    }
+
+    .hamburger-menu,
+    .back-to-home,
+    .close-sidebar {
+        width: 50px;
+        height: 50px;
+        border-radius: 12px;
+        background: rgba(0, 18, 21, 0.95);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border: 1.5px solid var(--term-cyan);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .hamburger-menu i,
+    .back-to-home i,
+    .close-sidebar i {
+        font-size: 1.3rem;
+        color: var(--term-cyan);
+    }
+
+    /* Notch Area Spacing */
+    @supports (padding-top: env(safe-area-inset-top)) {
+        .main-header {
+            padding-top: env(safe-area-inset-top);
+        }
+
+        .sidebar-content {
+            padding-top: calc(env(safe-area-inset-top) + 3rem);
+        }
+    }
+
+    /* Better Touch Feedback */
+    .contact-item:active,
+    .hamburger-menu:active,
+    .back-to-home:active,
+    .close-sidebar:active {
+        transform: scale(0.96);
+        background: rgba(0, 230, 255, 0.15);
+        transition: all 0.1s ease;
+    }
+
+    /* Momentum Scrolling */
+    .sidebar {
+        overflow-y: scroll;
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior: contain;
+    }
+
+    /* Prevent Text Selection */
+    .contact-item,
+    .hamburger-menu,
+    .back-to-home,
+    .close-sidebar {
+        -webkit-user-select: none;
+        user-select: none;
+    }
+}
+
+/* Hide Address Bar on iOS */
+@media screen and (orientation: portrait) {
+    html, body {
+        min-height: -webkit-fill-available;
+    }
+    
+    .sidebar {
+        min-height: -webkit-fill-available;
+    }
+}
+
+/* Optimize for iPhone Notch */
+@supports (padding-top: env(safe-area-inset-top)) {
+    .main-header {
+        padding-top: env(safe-area-inset-top);
+        height: calc(60px + env(safe-area-inset-top));
+    }
+    
+    .sidebar {
+        padding-top: env(safe-area-inset-top);
+        padding-bottom: env(safe-area-inset-bottom);
+        height: calc(100vh - env(safe-area-inset-top));
+    }
 } 

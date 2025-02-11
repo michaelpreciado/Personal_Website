@@ -114,8 +114,9 @@ h3 {
 p {
     margin: 0 0 var(--space-md);
     font-size: var(--font-size-md);
-    color: var(--term-cyan-dim);
+    color: #FFFFFF;
     line-height: 1.6;
+    font-family: 'Consolas', monospace;
 }
 
 /* Enhanced Container Layouts */
@@ -703,4 +704,18 @@ code, pre {
   padding: 1em 1.5em;
   min-height: 48px;
   font-size: clamp(0.9rem, 3.5vw, 1.1rem);
+}
+
+.profile-header-text h1 {
+    font-family: 'Share Tech Mono', monospace;
+    color: var(--term-cyan-bright);
+    text-shadow: var(--term-glow-strong);
+}
+
+.bio-card p,
+.project-description,
+.job-ready-description p {
+    font-family: 'Consolas', monospace;
+    color: #FFFFFF;
+    line-height: 1.6;
 }

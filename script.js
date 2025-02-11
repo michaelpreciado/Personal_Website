@@ -688,3 +688,144 @@ setInterval(() => {
     });
 }, 5000);
 
+// Enhanced Sidebar Functionality for iOS
+function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const body = document.body;
+    
+    if (sidebar.classList.contains('active')) {
+        // Closing sidebar
+        sidebar.classList.remove('active');
+        body.classList.remove('sidebar-open');
+        
+        // Re-enable scrolling after animation
+        setTimeout(() => {
+            body.style.position = '';
+            body.style.width = '';
+            body.style.top = '';
+            window.scrollTo(0, parseInt(body.style.top || '0') * -1);
+        }, 300);
+    } else {
+        // Opening sidebar - Store current scroll position
+        const scrollY = window.scrollY;
+        body.style.position = 'fixed';
+        body.style.width = '100%';
+        body.style.top = `-${scrollY}px`;
+        sidebar.classList.add('active');
+        body.classList.add('sidebar-open');
+    }
+}
+
+// Improved touch handling for sidebar
+document.addEventListener('DOMContentLoaded', () => {
+    const sidebar = document.getElementById('sidebar');
+    const sidebarContent = sidebar.querySelector('.sidebar-content');
+    let touchStartY = 0;
+    let touchStartTime = 0;
+    let isSwiping = false;
+    
+    // Prevent default touch events on iOS
+    sidebar.addEventListener('touchstart', (e) => {
+        touchStartY = e.touches[0].clientY;
+        touchStartTime = Date.now();
+        isSwiping = false;
+    }, { passive: true });
+    
+    sidebar.addEventListener('touchmove', (e) => {
+        if (!isSwiping) {
+            const touchY = e.touches[0].clientY;
+            const deltaY = touchStartY - touchY;
+            
+            // Only prevent default if scrolling at boundaries
+            if ((deltaY > 0 && sidebarContent.scrollTop === 0) ||
+                (deltaY < 0 && sidebarContent.scrollHeight - sidebarContent.scrollTop === sidebarContent.clientHeight)) {
+                e.preventDefault();
+            }
+            
+            // Check if user is swiping horizontally to close
+            if (Math.abs(e.touches[0].clientX - touchStartY) > 30) {
+                isSwiping = true;
+            }
+        }
+    }, { passive: false });
+    
+    sidebar.addEventListener('touchend', (e) => {
+        const touchEndTime = Date.now();
+        const touchDuration = touchEndTime - touchStartTime;
+        
+        // Close sidebar on quick swipe
+        if (isSwiping && touchDuration < 250) {
+            toggleSidebar();
+        }
+    }, { passive: true });
+});
+
+// iOS Safari height fix
+function setViewHeight() {
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
+
+window.addEventListener('resize', setViewHeight);
+window.addEventListener('orientationchange', () => {
+    setTimeout(setViewHeight, 100);
+});
+
+setViewHeight();
+
+// Optimize scroll performance
+let isScrolling;
+window.addEventListener('scroll', () => {
+    window.clearTimeout(isScrolling);
+    document.body.classList.add('is-scrolling');
+    
+    isScrolling = setTimeout(() => {
+        document.body.classList.remove('is-scrolling');
+    }, 66);
+}, { passive: true });
+
+// Better touch feedback for all interactive elements
+document.addEventListener('DOMContentLoaded', () => {
+    const interactiveElements = document.querySelectorAll('a, button, .project-card, .bio-card');
+    
+    interactiveElements.forEach(element => {
+        element.addEventListener('touchstart', () => {
+            element.style.transform = 'scale(0.98)';
+            element.style.transition = 'transform 0.1s ease';
+        }, { passive: true });
+        
+        element.addEventListener('touchend', () => {
+            element.style.transform = '';
+            element.style.transition = 'transform 0.2s ease';
+        }, { passive: true });
+        
+        element.addEventListener('touchcancel', () => {
+            element.style.transform = '';
+            element.style.transition = 'transform 0.2s ease';
+        }, { passive: true });
+    });
+});
+
+// Prevent rubber-banding/overscroll on iOS
+document.body.addEventListener('touchmove', (e) => {
+    if (e.target === document.body) {
+        e.preventDefault();
+    }
+}, { passive: false });
+
+// Handle iOS keyboard
+const inputs = document.querySelectorAll('input, textarea');
+inputs.forEach(input => {
+    input.addEventListener('focus', () => {
+        setTimeout(() => {
+            window.scrollTo(0, window.scrollY + 1);
+        }, 100);
+    });
+    
+    input.addEventListener('blur', () => {
+        setTimeout(() => {
+            window.scrollTo(0, window.scrollY);
+        }, 100);
+    });
+});
+
