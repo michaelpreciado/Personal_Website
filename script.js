@@ -1,3 +1,96 @@
+/* Initialize particles.js */
+document.addEventListener('DOMContentLoaded', function() {
+    particlesJS("particles-js", {
+        particles: {
+            number: {
+                value: 80,
+                density: {
+                    enable: true,
+                    value_area: 800
+                }
+            },
+            color: {
+                value: ["#00FFFF", "#FF00C1", "#9400D3"]
+            },
+            shape: {
+                type: "circle"
+            },
+            opacity: {
+                value: 0.6,
+                random: false,
+                anim: {
+                    enable: true,
+                    speed: 1,
+                    opacity_min: 0.3,
+                    sync: false
+                }
+            },
+            size: {
+                value: 3,
+                random: true,
+                anim: {
+                    enable: true,
+                    speed: 2,
+                    size_min: 0.3,
+                    sync: false
+                }
+            },
+            line_linked: {
+                enable: true,
+                distance: 150,
+                color: "#00FFFF",
+                opacity: 0.4,
+                width: 1,
+                shadow: {
+                    enable: true,
+                    color: "#00FFFF",
+                    blur: 5
+                }
+            },
+            move: {
+                enable: true,
+                speed: 2,
+                direction: "none",
+                random: true,
+                straight: false,
+                out_mode: "bounce",
+                bounce: true,
+                attract: {
+                    enable: true,
+                    rotateX: 600,
+                    rotateY: 1200
+                }
+            }
+        },
+        interactivity: {
+            detect_on: "canvas",
+            events: {
+                onhover: {
+                    enable: true,
+                    mode: "grab"
+                },
+                onclick: {
+                    enable: true,
+                    mode: "push"
+                },
+                resize: true
+            },
+            modes: {
+                grab: {
+                    distance: 140,
+                    line_linked: {
+                        opacity: 0.8
+                    }
+                },
+                push: {
+                    particles_nb: 4
+                }
+            }
+        },
+        retina_detect: true
+    });
+});
+
 /* Pip-Boy Particles Configuration */
 particlesJS("particles-js", {
   "particles": {
@@ -597,99 +690,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     nameElement.textContent = '';
     typeLetter();
-});
-
-// Initialize particles with optimized settings
-document.addEventListener('DOMContentLoaded', function() {
-    particlesJS("particles-js", {
-        particles: {
-            number: {
-                value: 80,
-                density: {
-                    enable: true,
-                    value_area: 800
-                }
-            },
-            color: {
-                value: ["#00FFFF", "#FF00C1", "#9400D3"]
-            },
-            shape: {
-                type: "circle"
-            },
-            opacity: {
-                value: 0.6,
-                random: false,
-                anim: {
-                    enable: true,
-                    speed: 1,
-                    opacity_min: 0.3,
-                    sync: false
-                }
-            },
-            size: {
-                value: 3,
-                random: true,
-                anim: {
-                    enable: true,
-                    speed: 2,
-                    size_min: 0.3,
-                    sync: false
-                }
-            },
-            line_linked: {
-                enable: true,
-                distance: 150,
-                color: "#00FFFF",
-                opacity: 0.4,
-                width: 1,
-                shadow: {
-                    enable: true,
-                    color: "#00FFFF",
-                    blur: 5
-                }
-            },
-            move: {
-                enable: true,
-                speed: 2,
-                direction: "none",
-                random: true,
-                straight: false,
-                out_mode: "bounce",
-                bounce: true,
-                attract: {
-                    enable: true,
-                    rotateX: 600,
-                    rotateY: 1200
-                }
-            }
-        },
-        interactivity: {
-            detect_on: "canvas",
-            events: {
-                onhover: {
-                    enable: true,
-                    mode: "grab"
-                },
-                onclick: {
-                    enable: true,
-                    mode: "push"
-                },
-                resize: true
-            },
-            modes: {
-                grab: {
-                    distance: 140,
-                    line_linked: {
-                        opacity: 0.8
-                    }
-                },
-                push: {
-                    particles_nb: 4
-                }
-            }
-        },
-        retina_detect: true
-    });
 });
 
 // Terminal typing effect
