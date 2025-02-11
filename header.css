@@ -3,6 +3,226 @@
     position: fixed;
     top: 0;
     left: 0;
+    right: 0;
+    z-index: 1000;
+    background: rgba(0, 18, 21, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: max(env(safe-area-inset-top), 8px) max(env(safe-area-inset-right), 16px) 8px max(env(safe-area-inset-left), 16px);
+    height: calc(44px + env(safe-area-inset-top));
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--term-cyan-dark);
+}
+
+/* Header Content */
+.header-content {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0;
+}
+
+/* Menu Toggle Button */
+.menu-toggle {
+    min-width: 44px;
+    min-height: 44px;
+    border-radius: 12px;
+    background: rgba(0, 230, 255, 0.1);
+    border: 1.5px solid var(--term-cyan);
+    color: var(--term-cyan-bright);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+    -webkit-tap-highlight-color: transparent;
+    transition: all 0.2s ease;
+}
+
+.menu-toggle i {
+    font-size: 1.3rem;
+}
+
+.menu-toggle:active {
+    transform: scale(0.96);
+    background: rgba(0, 230, 255, 0.2);
+}
+
+/* Enhanced Mobile Sidebar */
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    background: rgba(0, 18, 21, 0.98);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transform: translateX(100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 2000;
+    padding: calc(env(safe-area-inset-top) + 16px) 
+             max(env(safe-area-inset-right), 16px)
+             max(env(safe-area-inset-bottom), 16px)
+             max(env(safe-area-inset-left), 16px);
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar.active {
+    transform: translateX(0);
+}
+
+/* Sidebar Content */
+.sidebar-content {
+    flex: 1;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 16px 0;
+}
+
+/* Close Button */
+.close-sidebar {
+    position: absolute;
+    top: max(env(safe-area-inset-top), 16px);
+    right: max(env(safe-area-inset-right), 16px);
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: rgba(0, 230, 255, 0.1);
+    border: 1.5px solid var(--term-cyan);
+    color: var(--term-cyan);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    -webkit-tap-highlight-color: transparent;
+    transition: all 0.2s ease;
+}
+
+.close-sidebar i {
+    font-size: 1.3rem;
+}
+
+.close-sidebar:active {
+    transform: scale(0.96);
+    background: rgba(0, 230, 255, 0.2);
+}
+
+/* Contact Section */
+.contact-section {
+    padding-top: 60px;
+}
+
+.contact-section h2 {
+    font-size: 1.4rem;
+    color: var(--term-cyan-bright);
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+/* Contact Items */
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.contact-item {
+    min-height: 44px;
+    padding: 12px 16px;
+    background: rgba(0, 230, 255, 0.1);
+    border: 1.5px solid var(--term-cyan);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--term-cyan);
+    text-decoration: none;
+    font-size: 1rem;
+    -webkit-tap-highlight-color: transparent;
+    transition: all 0.2s ease;
+}
+
+.contact-item i {
+    font-size: 1.2rem;
+    min-width: 24px;
+    text-align: center;
+}
+
+.contact-item:active {
+    transform: scale(0.96);
+    background: rgba(0, 230, 255, 0.2);
+}
+
+/* Location Info */
+.location-info {
+    margin-top: 24px;
+    padding-top: 16px;
+    border-top: 1px solid var(--term-cyan-dark);
+    text-align: center;
+}
+
+.location-info p {
+    color: var(--term-cyan-dim);
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.location-info i {
+    color: var(--term-cyan);
+}
+
+/* Prevent Body Scroll */
+body.sidebar-open {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+}
+
+/* iOS-specific Optimizations */
+@supports (-webkit-touch-callout: none) {
+    .sidebar {
+        height: -webkit-fill-available;
+    }
+    
+    .sidebar-content {
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+    
+    .contact-item {
+        -webkit-touch-callout: none;
+    }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    .sidebar {
+        transition: none;
+    }
+}
+
+/* Dark Mode Enhancements */
+@media (prefers-color-scheme: dark) {
+    .main-header {
+        background: rgba(0, 18, 21, 0.98);
+    }
+    
+    .sidebar {
+        background: rgba(0, 18, 21, 0.98);
+    }
+}
+
+/* Mobile-First Header */
+.main-header {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
     z-index: 1000;
     background: rgba(0, 18, 21, 0.9);

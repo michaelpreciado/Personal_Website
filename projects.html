@@ -7,85 +7,38 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Projects - Michael Preciado</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="header.css">
     <link rel="stylesheet" href="projects.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <header class="main-header">
-        <div class="header-content">
-            <a href="index.html" class="back-to-home" aria-label="Return to home page">
-                <i class="fa fa-chevron-left"></i>
-                <span>Home</span>
-            </a>
-            <button class="hamburger-menu" onclick="toggleSidebar()" aria-label="Contact menu">
-                <i class="fa fa-address-card"></i>
-                <span>Contact</span>
-            </button>
-        </div>
-    </header>
-
-    <div class="sidebar" id="sidebar">
-        <div class="sidebar-content">
-            <button class="close-sidebar" onclick="toggleSidebar()">
-                <i class="fa fa-times"></i>
-            </button>
-            <div class="contact-section">
-                <h2>Let's Connect!</h2>
-                <div class="contact-info">
-                    <a href="mailto:mpreciado1997@gmail.com" class="contact-item">
-                        <i class="fas fa-envelope"></i>
-                        <span>mpreciado1997@gmail.com</span>
-                    </a>
-                    <a href="https://github.com/michaelpreciado" target="_blank" rel="noopener" class="contact-item">
-                        <i class="fab fa-github"></i>
-                        <span>GitHub</span>
-                    </a>
-                    <a href="https://www.linkedin.com/in/michael-preciado-74959b227/" target="_blank" rel="noopener" class="contact-item">
-                        <i class="fab fa-linkedin"></i>
-                        <span>LinkedIn</span>
-                    </a>
-                    <a href="https://twitter.com/MichaelPreciad0" target="_blank" rel="noopener" class="contact-item">
-                        <i class="fab fa-x-twitter"></i>
-                        <span>X Social</span>
-                    </a>
-                </div>
-                <div class="location-info">
-                    <p><i class="fas fa-map-marker-alt"></i> California, United States</p>
-                </div>
+    <main class="linktree-container">
+        <!-- Profile Section -->
+        <section class="profile-section">
+            <div class="profile-image">
+                <img src="./public/blue.jpeg" alt="Michael Preciado" loading="lazy">
             </div>
-        </div>
-    </div>
-
-    <main class="projects-container">
-        <div class="projects-header">
             <h1>My Projects</h1>
-            <p>Here's a collection of my recent work and personal projects. Each one represents a unique challenge and learning experience.</p>
-        </div>
+            <p class="bio">A collection of my recent work and personal projects</p>
+        </section>
 
-        <div class="project-cards">
-            <article class="project-card">
-                <div class="project-image">
-                    <div class="dev-placeholder">
-                        <i class="fas fa-tools"></i>
-                        <span>In Development</span>
-                    </div>
-                </div>
+        <!-- Projects Section -->
+        <section class="links-section">
+            <!-- Neural Network Project -->
+            <article class="link-card project-card">
                 <div class="project-content">
-                    <h2 class="project-title">Visual Representation of a Neural Network</h2>
-                    <p class="project-description">An interactive tool that visually represents the structure and function of a neural network, providing insights into its layers and operations. Built with D3.js and TensorFlow.js.</p>
+                    <h2 class="project-title">Visual Neural Network</h2>
+                    <p class="project-description">An interactive tool that visually represents neural network structure and operations.</p>
                     <div class="project-tags">
                         <span class="project-tag">D3.js</span>
                         <span class="project-tag">TensorFlow.js</span>
-                        <span class="project-tag">Visualization</span>
                         <span class="project-tag">Neural Networks</span>
                     </div>
                     <div class="project-links">
-                        <a href="https://michaelpreciado.github.io/Neural_Network_Visualizer/" class="project-link" target="_blank">
+                        <a href="https://github.com/michaelpreciado/Neural_Network_Visualizer" class="project-link" target="_blank">
                             <i class="fab fa-github"></i>
                             <span>View Code</span>
                         </a>
@@ -97,21 +50,15 @@
                 </div>
             </article>
 
-            <article class="project-card">
-                <div class="project-image">
-                    <div class="dev-placeholder">
-                        <i class="fas fa-tools"></i>
-                        <span>In Development</span>
-                    </div>
-                </div>
+            <!-- Photography Portfolio -->
+            <article class="link-card project-card">
                 <div class="project-content">
                     <h2 class="project-title">Photography Portfolio</h2>
-                    <p class="project-description">A minimalist photography portfolio showcasing landscape and street photography. Features dynamic image galleries, lazy loading, and responsive masonry layout.</p>
+                    <p class="project-description">A minimalist photography portfolio showcasing landscape and street photography.</p>
                     <div class="project-tags">
                         <span class="project-tag">React</span>
                         <span class="project-tag">Next.js</span>
                         <span class="project-tag">Framer Motion</span>
-                        <span class="project-tag">Cloudinary</span>
                     </div>
                     <div class="project-links">
                         <a href="https://github.com/michaelpreciado/mario.preciado.photography" class="project-link" target="_blank">
@@ -125,64 +72,21 @@
                     </div>
                 </div>
             </article>
+        </section>
 
-            <article class="project-card">
-                <div class="project-image">
-                    <div class="dev-placeholder">
-                        <i class="fas fa-tools"></i>
-                        <span>In Development</span>
-                    </div>
-                </div>
-                <div class="project-content">
-                    <h2 class="project-title">3D Printed Humanoid Dog Project</h2>
-                    <p class="project-description">A 3D printed humanoid dog designed for educational purposes, featuring interactive sensors and programmable behaviors. Built with Arduino and 3D printing technology.</p>
-                    <div class="project-tags">
-                        <span class="project-tag">Arduino</span>
-                        <span class="project-tag">3D Printing</span>
-                        <span class="project-tag">Robotics</span>
-                        <span class="project-tag">Education</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="#" class="project-link" target="_blank">
-                            <i class="fab fa-github"></i>
-                            <span>View Code</span>
-                        </a>
-                        <a href="#" class="project-link">
-                            <i class="fas fa-external-link-alt"></i>
-                            <span>Live Demo</span>
-                        </a>
-                    </div>
-                </div>
-            </article>
-        </div>
+        <!-- Back to Home Button -->
+        <a href="index.html" class="contact-button">
+            <i class="fas fa-chevron-left"></i>
+            <span>Back to Home</span>
+        </a>
     </main>
 
-    <footer class="mp-footer">
-        Created by <span>MP</span>
-    </footer>
-
+    <!-- Background Effects -->
     <div id="particles-js"></div>
-    <script src='https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js'></script>
-    <script src="https://kit.fontawesome.com/2ee2f92aca.js" crossorigin="anonymous"></script>
-    <script src="./header.js"></script>
-    <script src="./script.js"></script>
-    <script>
-        function toggleSidebar() {
-            document.getElementById('sidebar').classList.toggle('active');
-            document.body.classList.toggle('sidebar-open');
-        }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            // Initialize carousel
-            const carousel = new ProjectCarousel();
-            
-            // Re-initialize particles with same config
-            particlesJS('particles-js', {/* Same config as home page */});
-            
-            // Initialize typing effects
-            initializeTypingEffects();
-        });
-    </script>
+    <!-- Scripts -->
+    <script src='https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js'></script>
+    <script src="./script.js"></script>
 </body>
 
 </html> 

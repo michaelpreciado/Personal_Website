@@ -2,7 +2,7 @@
 particlesJS("particles-js", {
   "particles": {
     "number": {
-      "value": 150,
+      "value": 80,
       "density": {
         "enable": true,
         "value_area": 800
@@ -15,36 +15,49 @@ particlesJS("particles-js", {
       "type": "circle"
     },
     "opacity": {
-      "value": 0.5,
-      "random": true
+      "value": 0.6,
+      "random": false,
+      "anim": {
+        "enable": true,
+        "speed": 1,
+        "opacity_min": 0.3,
+        "sync": false
+      }
     },
     "size": {
-      "value": 2,
-      "random": true
+      "value": 3,
+      "random": true,
+      "anim": {
+        "enable": true,
+        "speed": 2,
+        "size_min": 0.3,
+        "sync": false
+      }
     },
     "line_linked": {
       "enable": true,
       "distance": 150,
       "color": "#00FFFF",
-      "opacity": 0.25,
+      "opacity": 0.4,
       "width": 1,
       "shadow": {
         "enable": true,
-        "color": "#FF00C1",
+        "color": "#00FFFF",
         "blur": 5
       }
     },
     "move": {
       "enable": true,
-      "speed": 1.5,
+      "speed": 2,
       "direction": "none",
       "random": true,
       "straight": false,
-      "out_mode": "out",
+      "out_mode": "bounce",
+      "bounce": true,
       "attract": {
-        "enable": false,
-        "rotateX": 0,
-        "rotateY": 0
+        "enable": true,
+        "rotateX": 600,
+        "rotateY": 1200
       }
     }
   },
@@ -53,7 +66,7 @@ particlesJS("particles-js", {
     "events": {
       "onhover": {
         "enable": true,
-        "mode": "repulse"
+        "mode": "grab"
       },
       "onclick": {
         "enable": true,
@@ -65,11 +78,11 @@ particlesJS("particles-js", {
       "grab": {
         "distance": 140,
         "line_linked": {
-          "opacity": 0.5
+          "opacity": 0.8
         }
       },
       "push": {
-        "particles_nb": 3
+        "particles_nb": 4
       }
     }
   },
@@ -587,57 +600,96 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Initialize particles with optimized settings
-function initParticles() {
+document.addEventListener('DOMContentLoaded', function() {
     particlesJS("particles-js", {
         particles: {
             number: {
-                value: window.innerWidth < 768 ? 80 : 120,
-                density: { enable: true, value_area: 600 }
+                value: 80,
+                density: {
+                    enable: true,
+                    value_area: 800
+                }
             },
-            color: { value: "#00E6FF" },
-            shape: { type: "circle" },
+            color: {
+                value: ["#00FFFF", "#FF00C1", "#9400D3"]
+            },
+            shape: {
+                type: "circle"
+            },
             opacity: {
-                value: 0.3,
-                random: true,
-                anim: { enable: true, speed: 0.5, opacity_min: 0.1 }
+                value: 0.6,
+                random: false,
+                anim: {
+                    enable: true,
+                    speed: 1,
+                    opacity_min: 0.3,
+                    sync: false
+                }
             },
             size: {
-                value: 2,
+                value: 3,
                 random: true,
-                anim: { enable: true, speed: 1, size_min: 0.1 }
+                anim: {
+                    enable: true,
+                    speed: 2,
+                    size_min: 0.3,
+                    sync: false
+                }
             },
             line_linked: {
                 enable: true,
-                distance: 100,
-                color: "#00E6FF",
-                opacity: 0.2,
-                width: 1
+                distance: 150,
+                color: "#00FFFF",
+                opacity: 0.4,
+                width: 1,
+                shadow: {
+                    enable: true,
+                    color: "#00FFFF",
+                    blur: 5
+                }
             },
             move: {
                 enable: true,
-                speed: 1,
+                speed: 2,
                 direction: "none",
                 random: true,
-                out_mode: "bounce"
+                straight: false,
+                out_mode: "bounce",
+                bounce: true,
+                attract: {
+                    enable: true,
+                    rotateX: 600,
+                    rotateY: 1200
+                }
             }
         },
         interactivity: {
             detect_on: "canvas",
             events: {
-                onhover: { enable: true, mode: "grab" },
-                onclick: { enable: true, mode: "push" },
+                onhover: {
+                    enable: true,
+                    mode: "grab"
+                },
+                onclick: {
+                    enable: true,
+                    mode: "push"
+                },
                 resize: true
+            },
+            modes: {
+                grab: {
+                    distance: 140,
+                    line_linked: {
+                        opacity: 0.8
+                    }
+                },
+                push: {
+                    particles_nb: 4
+                }
             }
         },
         retina_detect: true
     });
-}
-
-// Call on load and resize
-window.addEventListener('load', initParticles);
-window.addEventListener('resize', () => {
-    if(window.pJSDom[0]) window.pJSDom[0].pJS.fn.vendors.destroy();
-    initParticles();
 });
 
 // Terminal typing effect
@@ -826,6 +878,124 @@ inputs.forEach(input => {
         setTimeout(() => {
             window.scrollTo(0, window.scrollY);
         }, 100);
+    });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Elements
+    const menuToggle = document.querySelector('.menu-toggle');
+    const sidebar = document.querySelector('.sidebar');
+    const closeButton = document.querySelector('.close-sidebar');
+    const body = document.body;
+    
+    // Touch Variables
+    let touchStartX = 0;
+    let touchEndX = 0;
+    let isSwiping = false;
+    
+    // Fix iOS 100vh issue
+    const setViewportHeight = () => {
+        document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
+    };
+    
+    // Initial height set and resize listener
+    setViewportHeight();
+    window.addEventListener('resize', () => {
+        setViewportHeight();
+    });
+    
+    // Toggle Sidebar Function
+    const toggleSidebar = () => {
+        const isOpen = sidebar.classList.contains('active');
+        sidebar.classList.toggle('active');
+        
+        if (!isOpen) {
+            body.classList.add('sidebar-open');
+            body.style.top = `-${window.scrollY}px`;
+            body.style.position = 'fixed';
+        } else {
+            body.classList.remove('sidebar-open');
+            const scrollY = body.style.top;
+            body.style.position = '';
+            body.style.top = '';
+            window.scrollTo(0, parseInt(scrollY || '0') * -1);
+        }
+    };
+    
+    // Event Listeners
+    menuToggle.addEventListener('click', toggleSidebar);
+    closeButton.addEventListener('click', toggleSidebar);
+    
+    // Touch Event Handlers
+    sidebar.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].clientX;
+        isSwiping = true;
+    }, { passive: true });
+    
+    sidebar.addEventListener('touchmove', (e) => {
+        if (!isSwiping) return;
+        
+        touchEndX = e.touches[0].clientX;
+        const diffX = touchStartX - touchEndX;
+        
+        // Only prevent default if swiping from right edge
+        if (touchStartX > window.innerWidth - 30 && diffX < 0) {
+            e.preventDefault();
+        }
+    }, { passive: false });
+    
+    sidebar.addEventListener('touchend', () => {
+        if (!isSwiping) return;
+        
+        const diffX = touchStartX - touchEndX;
+        
+        // Close sidebar if swiped right to left
+        if (diffX > 50) {
+            toggleSidebar();
+        }
+        
+        isSwiping = false;
+    });
+    
+    // Prevent rubber-banding/overscroll
+    document.addEventListener('touchmove', (e) => {
+        if (body.classList.contains('sidebar-open')) {
+            e.preventDefault();
+        }
+    }, { passive: false });
+    
+    // Close sidebar when clicking outside
+    document.addEventListener('click', (e) => {
+        if (sidebar.classList.contains('active') && 
+            !sidebar.contains(e.target) && 
+            !menuToggle.contains(e.target)) {
+            toggleSidebar();
+        }
+    });
+    
+    // Handle keyboard appearance
+    const inputs = document.querySelectorAll('input, textarea');
+    inputs.forEach(input => {
+        input.addEventListener('focus', () => {
+            // Add padding to prevent input from being hidden by keyboard
+            sidebar.style.paddingBottom = '20vh';
+        });
+        
+        input.addEventListener('blur', () => {
+            sidebar.style.paddingBottom = '';
+        });
+    });
+    
+    // Add active state for touch feedback
+    const touchElements = document.querySelectorAll('.contact-item, .menu-toggle, .close-sidebar');
+    touchElements.forEach(element => {
+        element.addEventListener('touchstart', () => {
+            element.style.transform = 'scale(0.96)';
+        }, { passive: true });
+        
+        element.addEventListener('touchend', () => {
+            element.style.transform = '';
+        }, { passive: true });
     });
 });
 
