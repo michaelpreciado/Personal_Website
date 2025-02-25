@@ -545,45 +545,55 @@
   }
   
   .link-card {
-    transform: scale(1);
-    padding: var(--space-xs) var(--space-sm);
-    margin: var(--space-xs) 0;
-    min-height: 44px; /* Increased for iOS touch targets */
-    width: 100%;
+    /* Instead of scaling, adjust the size directly */
+    transform: none;
+    padding: var(--space-xxs) var(--space-xs);
+    margin: var(--space-xxs) 0;
+    min-height: 30px; /* Reduced height */
+    width: 50%; /* Half width */
+    margin-left: auto;
+    margin-right: auto;
     /* Disable highlight color on tap for iOS */
     -webkit-tap-highlight-color: transparent;
     /* Add haptic touch effect */
     touch-action: manipulation;
+    /* Ensure proper alignment */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
   
   .link-card i:first-child {
-    margin-right: var(--space-xs);
-    min-width: 18px;
-    font-size: 14px;
+    margin-right: var(--space-xxs);
+    min-width: 12px;
+    font-size: 10px; /* Smaller icon */
   }
   
   .link-card span {
-    font-size: var(--font-size-xs);
+    font-size: 10px; /* Smaller text */
     padding: 0 var(--space-xxs);
   }
   
   .link-card i:last-child {
-    font-size: var(--font-size-xs);
+    font-size: 8px; /* Smaller icon */
     margin-left: var(--space-xxs);
-    min-width: 10px;
+    min-width: 8px;
   }
   
   .links-section {
     width: 95%;
     max-width: 95%;
-    transform: scale(1);
-    gap: var(--space-sm);
-    padding: var(--space-sm) var(--space-xs);
-    margin-bottom: var(--space-sm);
+    transform: none; /* No transform */
+    gap: var(--space-xs);
+    padding: var(--space-xs);
     /* Add padding for iOS safe areas */
     padding-left: max(var(--space-xs), env(safe-area-inset-left));
     padding-right: max(var(--space-xs), env(safe-area-inset-right));
     padding-bottom: max(var(--space-sm), env(safe-area-inset-bottom));
+    /* Ensure proper alignment of children */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .section-header {
@@ -593,6 +603,11 @@
   
   .section-header h1, .section-header h2 {
     font-size: var(--font-size-md);
+  }
+  
+  .section-header h2 {
+    font-size: var(--font-size-md); /* Smaller font size */
+    margin-bottom: var(--space-sm);
   }
   
   .projects-section {
@@ -752,4 +767,41 @@
 .ios-device .profile-tag {
   -webkit-user-select: none;
   user-select: none;
+}
+
+/* iOS-specific adjustments */
+.ios-device .link-card {
+  /* Instead of scaling, adjust the size directly */
+  transform: none;
+  width: 50%; /* Half width */
+  padding: var(--space-xxs) var(--space-xs);
+  min-height: 30px; /* Reduced height */
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.ios-device .link-card i:first-child {
+  font-size: 10px; /* Smaller icon */
+  min-width: 12px;
+}
+
+.ios-device .link-card span {
+  font-size: 10px; /* Smaller text */
+}
+
+.ios-device .link-card i:last-child {
+  font-size: 8px; /* Smaller icon */
+  min-width: 8px;
+}
+
+.ios-device .links-section {
+  transform: none; /* No transform */
+  /* Ensure proper padding for iOS safe areas */
+  padding-left: max(var(--space-xs), env(safe-area-inset-left));
+  padding-right: max(var(--space-xs), env(safe-area-inset-right));
+}
+
+.ios-device .section-header h2 {
+  font-size: var(--font-size-md); /* Smaller font size */
 } 
