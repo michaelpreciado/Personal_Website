@@ -58,6 +58,26 @@
                 }
             }, 2000); // 2 second fallback (reduced from 5 seconds)
         });
+        
+        // Ultimate fallback - if nothing happens after 5 seconds, force everything to be visible
+        setTimeout(function() {
+            document.querySelectorAll('h1, h2, .bio, .bio-description, .project-title, .project-description, .profile-tag, .link-card span').forEach(function(el) {
+                el.style.visibility = 'visible';
+                el.style.opacity = '1';
+            });
+            
+            // Hide loading screen if it's still visible
+            var loadingScreen = document.getElementById('ts-loading-screen');
+            if (loadingScreen) {
+                loadingScreen.classList.add('hidden');
+            }
+            
+            // Ensure bio description has content
+            var bioDescription = document.querySelector('.bio-description');
+            if (bioDescription && bioDescription.textContent.trim() === '' && bioDescription.getAttribute('data-type-effect')) {
+                bioDescription.textContent = bioDescription.getAttribute('data-type-effect');
+            }
+        }, 5000);
     </script>
     
     <!-- Inline critical CSS for faster text visibility -->
@@ -199,7 +219,7 @@
             </div>
 
             <!-- Bio Description -->
-            <p class="bio-description">
+            <p class="bio-description" data-type-effect="Passionate about leveraging technology to solve real-world problems. Seeking opportunities to contribute to innovative projects and grow within a dynamic team.">
                 Passionate about leveraging technology to solve real-world problems. Seeking opportunities to contribute to innovative projects and grow within a dynamic team.
             </p>
         </section>
@@ -262,6 +282,7 @@
             <div class="projects-container">
                 <!-- Neural Network Project -->
                 <article class="project-card">
+                    <div class="coming-soon-badge">Coming Soon</div>
                     <div class="project-image">
                         <img src="https://placehold.co/600x400/001621/00e6ff?text=Neural+Network+Visualizer" 
                              alt="Neural Network Visualizer" 
@@ -291,6 +312,7 @@
 
                 <!-- Photography Portfolio -->
                 <article class="project-card">
+                    <div class="coming-soon-badge">Coming Soon</div>
                     <div class="project-image">
                         <img src="https://placehold.co/600x400/001621/00e6ff?text=Photography+Portfolio" 
                              alt="Photography Portfolio" 
@@ -320,6 +342,7 @@
                 
                 <!-- AI Chatbot -->
                 <article class="project-card">
+                    <div class="coming-soon-badge">Coming Soon</div>
                     <div class="project-image">
                         <img src="https://placehold.co/600x400/001621/00e6ff?text=AI+Chatbot" 
                              alt="AI Chatbot" 
@@ -392,6 +415,7 @@
     <!-- Scripts - Use optimized script loading -->
     <script src="assets/js/lib/particles.min.js"></script>
     <script src="assets/js/particles.js"></script>
+    <script src="assets/js/loading.js"></script>
     <script src="assets/js/index.js"></script>
     <script src="assets/js/scroll-animations.js"></script>
     

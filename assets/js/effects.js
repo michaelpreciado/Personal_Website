@@ -11,8 +11,8 @@ document.addEventListener('DOMContentLoaded', function() {
   // Set up observers for lazy loading and animations
   setupObservers();
   
-  // Initialize typing effects if present
-  initTypingEffects();
+  // Initialize typing effects if present - REMOVED, now handled by loading.js
+  // initTypingEffects();
   
   // Set up touch interactions
   setupTouchInteractions();

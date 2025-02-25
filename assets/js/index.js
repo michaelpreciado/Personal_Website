@@ -167,7 +167,7 @@ document.addEventListener('DOMContentLoaded', function() {
     loadingScreen.classList.add('hidden');
     
     // Make all elements initially hidden but ready for scroll animations
-    document.querySelectorAll('h1, h2, .bio, .bio-description, .project-title, .project-description, .profile-tag, .link-card span').forEach(el => {
+    document.querySelectorAll('h1, h2, .bio, .project-title, .project-description, .profile-tag, .link-card span').forEach(el => {
       if (!el.classList.contains('animated') && !el.classList.contains('text-reveal')) {
         el.style.visibility = 'hidden';
         el.style.opacity = '0';
@@ -181,15 +181,33 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Fallback to ensure text is visible after a delay
     setTimeout(() => {
-      document.querySelectorAll('h1, h2, .bio, .bio-description, .project-title, .project-description, .profile-tag, .link-card span').forEach(el => {
+      document.querySelectorAll('h1, h2, .bio, .project-title, .project-description, .profile-tag, .link-card span').forEach(el => {
         if (el.style.visibility !== 'visible') {
           el.style.visibility = 'visible';
           el.style.opacity = '1';
           el.classList.add('text-reveal');
         }
       });
+      
+      // Ensure the bio description is visible and has content
+      const bioDescription = document.querySelector('.bio-description');
+      if (bioDescription && bioDescription.textContent.trim() === '' && bioDescription.dataset.typeEffect) {
+        // If loading.js hasn't started the typing effect yet, show the text directly
+        if (!bioDescription.classList.contains('typewriter')) {
+          bioDescription.textContent = bioDescription.dataset.typeEffect;
+        }
+      }
+      
+      // Dispatch an event to notify that text is visible
+      document.dispatchEvent(new CustomEvent('textElementsVisible'));
     }, 2000);
   }, delay + 1000);
+
+  // Initialize genie effect
+  enhanceGenieEffect();
+  
+  // Add particles to sidebar
+  addSidebarParticles();
 });
 
 // Simple text reveal function as backup
@@ -235,4 +253,71 @@ document.addEventListener('DOMContentLoaded', function() {
       backToTopButton.style.pointerEvents = 'none';
     }
   });
-}); 
+});
+
+// Enhance sidebar genie effect
+function enhanceGenieEffect() {
+    const contactButton = document.getElementById('contact-me');
+    const sidebarContent = document.querySelector('.sidebar-content');
+    
+    if (!contactButton || !sidebarContent) return;
+    
+    // Update the transform origin based on contact button position
+    function updateTransformOrigin() {
+        const buttonRect = contactButton.getBoundingClientRect();
+        const windowWidth = window.innerWidth;
+        const windowHeight = window.innerHeight;
+        
+        // Calculate position as percentage from bottom right
+        const originX = ((windowWidth - (buttonRect.left + buttonRect.width/2)) / windowWidth) * 100;
+        const originY = ((windowHeight - (buttonRect.top + buttonRect.height/2)) / windowHeight) * 100;
+        
+        // Set the transform origin
+        sidebarContent.style.transformOrigin = `${originX}% ${originY}%`;
+    }
+    
+    // Update on window resize
+    window.addEventListener('resize', updateTransformOrigin);
+    
+    // Update before sidebar opens
+    const originalToggleSidebar = window.toggleSidebar;
+    window.toggleSidebar = function() {
+        updateTransformOrigin();
+        originalToggleSidebar();
+    };
+    
+    // Initial setup
+    updateTransformOrigin();
+}
+
+// Add particle effects to the sidebar
+function addSidebarParticles() {
+    const sidebar = document.getElementById('sidebar');
+    if (!sidebar) return;
+    
+    // Create a particles container
+    const particlesContainer = document.createElement('div');
+    particlesContainer.className = 'sidebar-particles';
+    
+    // Add some particles
+    for (let i = 0; i < 20; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'genie-particle';
+        
+        // Random initial position
+        particle.style.left = `${Math.random() * 100}%`;
+        particle.style.top = `${Math.random() * 100}%`;
+        
+        // Random size
+        const size = 2 + Math.random() * 4;
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        
+        // Random animation delay
+        particle.style.animationDelay = `${Math.random() * 2}s`;
+        
+        particlesContainer.appendChild(particle);
+    }
+    
+    sidebar.insertBefore(particlesContainer, sidebar.firstChild);
+} 
