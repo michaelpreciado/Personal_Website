@@ -116,4 +116,127 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   });
-}); 
+});
+
+/**
+ * Scroll-based Text Animations
+ * This script handles text animations that trigger as elements enter the viewport
+ */
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Check if Intersection Observer is supported
+  if ('IntersectionObserver' in window) {
+    // Elements to observe for scroll-based animations
+    const elementsToAnimate = document.querySelectorAll('h1:not(.animated), h2:not(.animated), .bio:not(.animated), .bio-description:not(.animated), .project-title:not(.animated), .project-description:not(.animated), .profile-tag:not(.animated), .link-card span:not(.animated)');
+    
+    // Create observer with options
+    const observerOptions = {
+      root: null, // viewport
+      rootMargin: '0px 0px -50px 0px', // trigger slightly before element enters viewport
+      threshold: 0.1 // trigger when 10% of element is visible
+    };
+    
+    // Create the observer
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        // If element is entering the viewport
+        if (entry.isIntersecting) {
+          const element = entry.target;
+          
+          // Skip if already animated
+          if (element.classList.contains('animated') || element.classList.contains('text-reveal')) {
+            return;
+          }
+          
+          // Special handling for the name with permanent cursor
+          if (element.tagName === 'H1' && element.textContent.trim().includes('Michael Preciado')) {
+            // Check if there's already a permanent cursor
+            const existingCursor = element.querySelector('.permanent-cursor');
+            
+            // If there's already a cursor in the HTML, just make it visible
+            if (existingCursor) {
+              existingCursor.style.visibility = 'visible';
+              existingCursor.style.opacity = '1';
+              element.classList.add('text-reveal');
+              element.classList.add('animated');
+              return;
+            }
+          }
+          
+          // For headings and bio, use typing effect
+          if (element.tagName === 'H1' || element.tagName === 'H2' || element.classList.contains('bio')) {
+            animateTypingEffect(element);
+          } else {
+            // For other elements, use simple reveal
+            element.classList.add('text-reveal');
+            element.classList.add('animated');
+          }
+          
+          // Stop observing this element
+          observer.unobserve(element);
+        }
+      });
+    }, observerOptions);
+    
+    // Start observing elements
+    elementsToAnimate.forEach(element => {
+      // Make sure element is visible for animation
+      element.style.visibility = 'visible';
+      element.style.opacity = '0';
+      observer.observe(element);
+    });
+  } else {
+    // Fallback for browsers without Intersection Observer
+    document.querySelectorAll('h1, h2, .bio, .bio-description, .project-title, .project-description, .profile-tag, .link-card span').forEach(element => {
+      element.style.visibility = 'visible';
+      element.style.opacity = '1';
+      element.classList.add('no-animation');
+    });
+  }
+});
+
+/**
+ * Animate element with typing effect
+ * @param {HTMLElement} element - The element to animate
+ */
+function animateTypingEffect(element) {
+  // Store original text
+  const originalText = element.textContent.trim();
+  
+  // Clear the element
+  element.textContent = '';
+  element.classList.add('animated');
+  
+  // Create cursor element
+  const cursor = document.createElement('span');
+  cursor.className = 'typing-cursor';
+  cursor.textContent = '|';
+  
+  // Special handling for name to keep permanent cursor
+  const isPermanentCursor = element.tagName === 'H1' && originalText.includes('Michael Preciado');
+  if (isPermanentCursor) {
+    cursor.classList.add('permanent-cursor');
+  }
+  
+  // Add cursor to element
+  element.appendChild(cursor);
+  
+  // Type text character by character
+  let charIndex = 0;
+  const typeInterval = setInterval(() => {
+    if (charIndex < originalText.length) {
+      // Create text node for current character
+      const char = document.createTextNode(originalText.charAt(charIndex));
+      // Insert before cursor
+      element.insertBefore(char, cursor);
+      charIndex++;
+    } else {
+      clearInterval(typeInterval);
+      
+      // Remove cursor after typing unless it's permanent
+      if (!isPermanentCursor) {
+        setTimeout(() => cursor.remove(), 500);
+      }
+    }
+  }, 25); // Typing speed
+} 

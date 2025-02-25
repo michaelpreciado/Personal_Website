@@ -119,4 +119,120 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     });
   }
+
+  // TypeScript Loading Screen Animation
+  const loadingScreen = document.getElementById('ts-loading-screen');
+  const loadingBar = document.getElementById('loading-bar');
+  const terminalLines = document.querySelectorAll('.ts-line');
+  
+  // Animate terminal lines one by one
+  let delay = 100;
+  terminalLines.forEach((line, index) => {
+    // Hide all lines initially
+    line.style.opacity = '0';
+    
+    // Show lines with increasing delays
+    setTimeout(() => {
+      line.style.opacity = '1';
+      
+      // Add typing animation to command lines
+      const command = line.querySelector('.ts-command');
+      if (command) {
+        const text = command.textContent;
+        command.textContent = '';
+        let i = 0;
+        
+        const typeWriter = setInterval(() => {
+          if (i < text.length) {
+            command.textContent += text.charAt(i);
+            i++;
+          } else {
+            clearInterval(typeWriter);
+          }
+        }, 50);
+      }
+      
+      // Update loading bar progress
+      const progress = (index + 1) / terminalLines.length * 100;
+      loadingBar.style.width = `${progress}%`;
+      
+    }, delay);
+    
+    // Increase delay for next line
+    delay += (line.classList.contains('ts-output')) ? 200 : 500;
+  });
+  
+  // Hide loading screen after all animations complete
+  setTimeout(() => {
+    loadingScreen.classList.add('hidden');
+    
+    // Make all elements initially hidden but ready for scroll animations
+    document.querySelectorAll('h1, h2, .bio, .bio-description, .project-title, .project-description, .profile-tag, .link-card span').forEach(el => {
+      if (!el.classList.contains('animated') && !el.classList.contains('text-reveal')) {
+        el.style.visibility = 'hidden';
+        el.style.opacity = '0';
+      }
+    });
+    
+    // Trigger scroll event to check for elements in viewport
+    setTimeout(() => {
+      window.dispatchEvent(new Event('scroll'));
+    }, 100);
+    
+    // Fallback to ensure text is visible after a delay
+    setTimeout(() => {
+      document.querySelectorAll('h1, h2, .bio, .bio-description, .project-title, .project-description, .profile-tag, .link-card span').forEach(el => {
+        if (el.style.visibility !== 'visible') {
+          el.style.visibility = 'visible';
+          el.style.opacity = '1';
+          el.classList.add('text-reveal');
+        }
+      });
+    }, 2000);
+  }, delay + 1000);
+});
+
+// Simple text reveal function as backup
+function simpleTextReveal() {
+  const textElements = document.querySelectorAll('h1, h2, .bio, .bio-description, .project-title, .project-description, .profile-tag, .link-card span');
+  
+  // Make all elements visible immediately
+  textElements.forEach(el => {
+    el.style.visibility = 'visible';
+    el.style.opacity = '1';
+    el.classList.add('text-reveal');
+  });
+  
+  console.log('Using simple text reveal animation');
+}
+
+// Toggle sidebar function
+function toggleSidebar() {
+  const sidebar = document.getElementById('sidebar');
+  sidebar.classList.toggle('active');
+}
+
+// Back to top functionality
+document.addEventListener('DOMContentLoaded', function() {
+  const backToTopButton = document.getElementById('back-to-top');
+  
+  if (backToTopButton) {
+    backToTopButton.addEventListener('click', function() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  }
+  
+  // Show/hide back to top button based on scroll position
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > 300) {
+      backToTopButton.style.opacity = '1';
+      backToTopButton.style.pointerEvents = 'auto';
+    } else {
+      backToTopButton.style.opacity = '0';
+      backToTopButton.style.pointerEvents = 'none';
+    }
+  });
 }); 

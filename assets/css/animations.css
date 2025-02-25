@@ -238,3 +238,146 @@
     box-shadow: 0 0 20px rgba(30, 144, 255, 0.8);
   }
 } 
+
+/* Typing cursor animation */
+.typing-cursor {
+  display: inline-block !important;
+  width: 0.5em;
+  font-weight: bold;
+  color: #61dafb;
+  opacity: 1;
+  margin-left: 2px;
+  animation: blink 0.7s infinite;
+}
+
+/* Permanent cursor that stays at the end of the name */
+.permanent-cursor {
+  display: inline-block !important;
+  width: 0.5em;
+  font-weight: bold;
+  color: #61dafb;
+  opacity: 1;
+  margin-left: 2px;
+  animation: blink 0.7s infinite;
+  position: relative;
+  top: 0;
+  vertical-align: baseline;
+}
+
+/* Make sure the permanent cursor is always visible */
+h1 .permanent-cursor {
+  display: inline-block !important;
+  opacity: 1;
+  animation: blink 0.7s infinite !important;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Animated text elements */
+.animated {
+  position: relative;
+  display: inline-block;
+}
+
+/* Ensure text elements are hidden initially but can be revealed by JavaScript */
+h1:not(.animated):not(.text-reveal):not(.no-animation),
+h2:not(.animated):not(.text-reveal):not(.no-animation),
+.bio:not(.animated):not(.text-reveal):not(.no-animation),
+.bio-description:not(.animated):not(.text-reveal):not(.no-animation),
+.project-title:not(.animated):not(.text-reveal):not(.no-animation),
+.project-description:not(.animated):not(.text-reveal):not(.no-animation),
+.profile-tag:not(.animated):not(.text-reveal):not(.no-animation),
+.link-card span:not(.animated):not(.text-reveal):not(.no-animation) {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Ensure animated elements are visible */
+.animated, .text-reveal, .no-animation {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Text reveal animation - optimized for scroll-based triggering */
+@keyframes revealText {
+  from {
+    opacity: 0;
+    clip-path: inset(0 100% 0 0);
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+    transform: translateY(0);
+  }
+}
+
+.text-reveal {
+  animation: revealText 0.5s ease forwards;
+}
+
+/* TypeScript syntax highlighting effects */
+.ts-keyword {
+  color: #569CD6;
+}
+
+.ts-string {
+  color: #CE9178;
+}
+
+.ts-number {
+  color: #B5CEA8;
+}
+
+.ts-comment {
+  color: #6A9955;
+}
+
+.ts-type {
+  color: #4EC9B0;
+}
+
+.ts-function {
+  color: #DCDCAA;
+}
+
+/* Loading progress bar */
+.loading-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 4px;
+  background: linear-gradient(to right, #61dafb, #764abc);
+  transition: width 0.3s ease-out;
+}
+
+/* Simple text reveal animation as backup */
+.no-animation {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Immediate visibility for all text elements if JavaScript fails */
+body:not(:has(.animated)) h1,
+body:not(:has(.animated)) h2,
+body:not(:has(.animated)) .bio,
+body:not(:has(.animated)) .bio-description,
+body:not(:has(.animated)) .project-title,
+body:not(:has(.animated)) .project-description,
+body:not(:has(.animated)) .profile-tag,
+body:not(:has(.animated)) .link-card span {
+  visibility: visible !important;
+  opacity: 1 !important;
+  animation: none !important;
+}
+
+/* Faster loading screen transition */
+.ts-loading-screen.hidden {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+} 

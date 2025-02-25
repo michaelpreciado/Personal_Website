@@ -1,12 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="theme-color" content="#1E90FF">
+    <meta name="theme-color" content="#001215">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-title" content="Michael Preciado">
     <title>Michael Preciado - Software Developer</title>
     
     <!-- Preload critical assets -->
@@ -29,10 +31,138 @@
     <link rel="stylesheet" href="assets/css/header.css">
     <link rel="stylesheet" href="assets/css/custom.css">
     <link rel="stylesheet" href="assets/css/projects.css">
+    
+    <!-- Immediate text visibility fallback -->
+    <script>
+        // Set text elements to visible immediately
+        document.addEventListener('DOMContentLoaded', function() {
+            // First immediate visibility pass
+            setTimeout(function() {
+                document.querySelectorAll('h1, h2, .bio, .bio-description, .project-title, .project-description, .profile-tag, .link-card span').forEach(function(el) {
+                    el.style.visibility = 'visible';
+                    el.style.opacity = '1';
+                });
+            }, 500); // Very short timeout
+            
+            // Second fallback in case the first one fails
+            setTimeout(function() {
+                document.querySelectorAll('h1, h2, .bio, .bio-description, .project-title, .project-description, .profile-tag, .link-card span').forEach(function(el) {
+                    el.style.visibility = 'visible';
+                    el.style.opacity = '1';
+                });
+                
+                // Hide loading screen if it's still visible
+                var loadingScreen = document.getElementById('ts-loading-screen');
+                if (loadingScreen) {
+                    loadingScreen.classList.add('hidden');
+                }
+            }, 2000); // 2 second fallback (reduced from 5 seconds)
+        });
+    </script>
+    
+    <!-- Inline critical CSS for faster text visibility -->
+    <style>
+        /* Critical styles for text visibility */
+        h1, h2, .bio, .bio-description, .project-title, .project-description, .profile-tag, .link-card span {
+            visibility: visible !important;
+            opacity: 1 !important;
+            transition: none !important;
+        }
+        
+        /* Hide these styles after JavaScript loads */
+        .js-loaded h1, .js-loaded h2, .js-loaded .bio, .js-loaded .bio-description, 
+        .js-loaded .project-title, .js-loaded .project-description, 
+        .js-loaded .profile-tag, .js-loaded .link-card span {
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0s, opacity 0.3s;
+        }
+    </style>
+    
+    <!-- Add js-loaded class to body when DOM is ready -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.body.classList.add('js-loaded');
+        });
+    </script>
 </head>
 
 <body>
-    <main class="linktree-container">
+    <!-- TypeScript-themed Loading Screen -->
+    <div id="ts-loading-screen" class="ts-loading-screen">
+        <div class="loading-bar" id="loading-bar"></div>
+        <div class="ts-terminal">
+            <div class="ts-terminal-header">
+                <span class="ts-terminal-title">terminal@michaelpreciado:~</span>
+                <div class="ts-terminal-buttons">
+                    <span class="ts-terminal-button"></span>
+                    <span class="ts-terminal-button"></span>
+                    <span class="ts-terminal-button"></span>
+                </div>
+            </div>
+            <div class="ts-terminal-content">
+                <div class="ts-line">
+                    <span class="ts-prompt">$</span>
+                    <span class="ts-command">npm install</span>
+                </div>
+                <div class="ts-line ts-output">
+                    <span>Installing dependencies...</span>
+                </div>
+                <div class="ts-line ts-output">
+                    <span>+ typescript@5.3.3</span>
+                </div>
+                <div class="ts-line ts-output">
+                    <span>+ react@18.2.0</span>
+                </div>
+                <div class="ts-line ts-output">
+                    <span>+ next@14.0.4</span>
+                </div>
+                <div class="ts-line ts-output">
+                    <span>+ tailwindcss@3.4.0</span>
+                </div>
+                <div class="ts-line">
+                    <span class="ts-prompt">$</span>
+                    <span class="ts-command">npm run build</span>
+                </div>
+                <div class="ts-line ts-output">
+                    <span>Creating optimized production build...</span>
+                </div>
+                <div class="ts-line ts-output">
+                    <span>Compiled successfully!</span>
+                </div>
+                <div class="ts-line">
+                    <span class="ts-prompt">$</span>
+                    <span class="ts-command">npm run start</span>
+                </div>
+                <div class="ts-line ts-output">
+                    <span>Starting server...</span>
+                </div>
+                <div class="ts-line ts-output">
+                    <span>Server running at http://localhost:3000</span>
+                </div>
+                <div class="ts-line">
+                    <span class="ts-prompt">$</span>
+                    <span class="ts-command">Loading profile data...</span>
+                </div>
+                <div class="ts-line ts-output">
+                    <span class="ts-code">
+                        <span class="ts-keyword">interface</span> <span class="ts-type">Profile</span> {<br>
+                        &nbsp;&nbsp;<span class="ts-keyword">name</span>: <span class="ts-type">string</span>;<br>
+                        &nbsp;&nbsp;<span class="ts-keyword">role</span>: <span class="ts-type">string</span>;<br>
+                        &nbsp;&nbsp;<span class="ts-keyword">skills</span>: <span class="ts-type">string[]</span>;<br>
+                        &nbsp;&nbsp;<span class="ts-keyword">projects</span>: <span class="ts-type">Project[]</span>;<br>
+                        }
+                    </span>
+                </div>
+                <div class="ts-line">
+                    <span class="ts-prompt">$</span>
+                    <span class="ts-command">Initializing application...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main class="linktree-container widescreen-optimized">
         <!-- Profile Section -->
         <section class="profile-section" id="profile-section">
             <div class="profile-image">
@@ -41,7 +171,7 @@
                      loading="lazy"
                      onerror="this.onerror=null; this.src='./public/blue.jpeg';">
             </div>
-            <h1>Michael Preciado</h1>
+            <h1>Michael Preciado<span class="permanent-cursor">|</span></h1>
             <p class="bio">Software & AI Solutions</p>
             
             <!-- Profile Tags -->
@@ -122,7 +252,7 @@
             </a>
         </section>
 
-        <!-- Projects Section -->
+        <!-- Projects Section with modified wrapper -->
         <section class="projects-section" id="projects-section">
             <div class="section-header">
                 <h1>My Projects</h1>
@@ -132,6 +262,12 @@
             <div class="projects-container">
                 <!-- Neural Network Project -->
                 <article class="project-card">
+                    <div class="project-image">
+                        <img src="https://placehold.co/600x400/001621/00e6ff?text=Neural+Network+Visualizer" 
+                             alt="Neural Network Visualizer" 
+                             loading="lazy"
+                             onerror="this.onerror=null; this.src='https://placehold.co/600x400/001621/00e6ff?text=Neural+Network+Visualizer'; this.classList.add('fallback-image');">
+                    </div>
                     <div class="project-content">
                         <h2 class="project-title">Visual Neural Network</h2>
                         <p class="project-description">Interactive tool for neural network visualization.</p>
@@ -155,9 +291,15 @@
 
                 <!-- Photography Portfolio -->
                 <article class="project-card">
+                    <div class="project-image">
+                        <img src="https://placehold.co/600x400/001621/00e6ff?text=Photography+Portfolio" 
+                             alt="Photography Portfolio" 
+                             loading="lazy"
+                             onerror="this.onerror=null; this.src='https://placehold.co/600x400/001621/00e6ff?text=Photography+Portfolio'; this.classList.add('fallback-image');">
+                    </div>
                     <div class="project-content">
                         <h2 class="project-title">Photography Portfolio</h2>
-                        <p class="project-description">Minimalist photography showcase.</p>
+                        <p class="project-description">Minimalist photography showcase with responsive image gallery and smooth transitions.</p>
                         <div class="project-tags">
                             <span class="project-tag">React</span>
                             <span class="project-tag">Next.js</span>
@@ -175,6 +317,38 @@
                         </div>
                     </div>
                 </article>
+                
+                <!-- AI Chatbot -->
+                <article class="project-card">
+                    <div class="project-image">
+                        <img src="https://placehold.co/600x400/001621/00e6ff?text=AI+Chatbot" 
+                             alt="AI Chatbot" 
+                             loading="lazy"
+                             onerror="this.onerror=null; this.src='https://placehold.co/600x400/001621/00e6ff?text=AI+Chatbot'; this.classList.add('fallback-image');">
+                    </div>
+                    <div class="project-content">
+                        <h2 class="project-title">AI Chatbot</h2>
+                        <p class="project-description">Conversational AI assistant with natural language processing capabilities.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Python</span>
+                            <span class="project-tag">NLP</span>
+                            <span class="project-tag">Machine Learning</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link" target="_blank">
+                                <i class="fab fa-github"></i>
+                                <span>Code</span>
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>
+                                <span>Demo</span>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+                
+                <!-- Space for additional project cards on ultra-wide screens -->
+                <div class="project-placeholder ultra-wide-only"></div>
             </div>
         </section>
 
@@ -185,7 +359,7 @@
         </button>
 
         <!-- Contact Button -->
-        <button class="contact-button" onclick="toggleSidebar()">
+        <button class="contact-button" id="contact-me" onclick="toggleSidebar()">
             <i class="fas fa-envelope"></i>
             <span>Contact Me</span>
         </button>
@@ -213,13 +387,136 @@
     </aside>
 
     <!-- Background Effects -->
-    <div id="particles-js"></div>
+    <div id="particles-js" class="fullscreen-bg"></div>
 
     <!-- Scripts - Use optimized script loading -->
     <script src="assets/js/lib/particles.min.js"></script>
     <script src="assets/js/particles.js"></script>
     <script src="assets/js/index.js"></script>
     <script src="assets/js/scroll-animations.js"></script>
+    
+    <!-- Responsive layout script -->
+    <script>
+        // Optimize layout for wide screens while maintaining vertical arrangement
+        function optimizeForScreenSize() {
+            const isWideScreen = window.innerWidth > 1600;
+            const isUltraWideScreen = window.innerWidth > 2560;
+            const isSuperUltraWideScreen = window.innerWidth > 3440;
+            const container = document.querySelector('.linktree-container');
+            
+            // Remove all screen size classes
+            container.classList.remove('widescreen-layout', 'ultrawide-layout', 'super-ultrawide-layout');
+            
+            // Apply appropriate class based on screen width
+            if (isSuperUltraWideScreen) {
+                container.classList.add('widescreen-layout', 'ultrawide-layout', 'super-ultrawide-layout');
+                document.body.classList.add('super-ultrawide-body');
+            } else if (isUltraWideScreen) {
+                container.classList.add('widescreen-layout', 'ultrawide-layout');
+                document.body.classList.add('ultrawide-body');
+            } else if (isWideScreen) {
+                container.classList.add('widescreen-layout');
+                document.body.classList.remove('ultrawide-body', 'super-ultrawide-body');
+            } else {
+                document.body.classList.remove('ultrawide-body', 'super-ultrawide-body');
+            }
+            
+            // Ensure proper spacing for vertical layout
+            const sections = document.querySelectorAll('section');
+            sections.forEach((section, index) => {
+                if (index > 0) {
+                    const spacing = isUltraWideScreen ? '60px' : (isWideScreen ? '40px' : '');
+                    section.style.marginTop = spacing;
+                }
+            });
+            
+            // Center particles canvas for ultrawide displays
+            if (isUltraWideScreen || isSuperUltraWideScreen) {
+                const particlesCanvas = document.querySelector('#particles-js canvas');
+                if (particlesCanvas) {
+                    // Force canvas to fill entire viewport width
+                    particlesCanvas.style.width = '100vw';
+                    particlesCanvas.style.position = 'fixed';
+                    particlesCanvas.style.left = '0';
+                }
+            }
+        }
+        
+        // Run on load and resize
+        window.addEventListener('load', optimizeForScreenSize);
+        window.addEventListener('resize', optimizeForScreenSize);
+        
+        // Extra optimization for ultrawide displays - recenter on scroll
+        if (window.innerWidth > 2560) {
+            window.addEventListener('scroll', function() {
+                const container = document.querySelector('.linktree-container');
+                if (container) {
+                    // Ensure container stays centered
+                    container.style.margin = '0 auto';
+                }
+            });
+        }
+    </script>
+    
+    <!-- iOS Optimizations -->
+    <script>
+        // Detect iOS device
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        
+        if (isIOS) {
+            // Add iOS-specific class to body
+            document.body.classList.add('ios-device');
+            
+            // Fix for 100vh issue on iOS (viewport height calculation with address bar)
+            function setVH() {
+                let vh = window.innerHeight * 0.01;
+                document.documentElement.style.setProperty('--vh', `${vh}px`);
+            }
+            
+            // Set initial viewport height
+            setVH();
+            
+            // Update on resize and orientation change
+            window.addEventListener('resize', setVH);
+            window.addEventListener('orientationchange', setVH);
+            
+            // Fix for double-tap zoom on iOS
+            document.addEventListener('touchend', function(event) {
+                // Prevent zooming on double-tap for interactive elements
+                if (event.target.tagName === 'A' || 
+                    event.target.tagName === 'BUTTON' || 
+                    event.target.closest('.project-card') || 
+                    event.target.closest('.link-card')) {
+                    event.preventDefault();
+                    // Trigger click for the element
+                    setTimeout(function() {
+                        event.target.click();
+                    }, 100);
+                }
+            }, false);
+            
+            // Fix for sticky hover effects on iOS
+            document.addEventListener('touchstart', function() {}, false);
+            
+            // Fix for scrolling issues when keyboard appears
+            const inputs = document.querySelectorAll('input, textarea');
+            inputs.forEach(input => {
+                input.addEventListener('focus', () => {
+                    // Add padding to bottom of page when keyboard appears
+                    document.body.style.paddingBottom = '150px';
+                    // Scroll to the input
+                    setTimeout(() => {
+                        input.scrollIntoView({behavior: 'smooth', block: 'center'});
+                    }, 300);
+                });
+                
+                input.addEventListener('blur', () => {
+                    // Remove padding when keyboard disappears
+                    document.body.style.paddingBottom = '0';
+                });
+            });
+        }
+    </script>
 </body>
 
 </html>
