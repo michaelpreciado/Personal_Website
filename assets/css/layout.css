@@ -138,33 +138,48 @@
 @media (max-width: 480px) {
   .grid-3col {
     grid-template-columns: 1fr;
+    gap: var(--space-xs);
   }
   
   .flex-row {
     flex-direction: column;
-    gap: var(--space-xs);
+    gap: 4px;
   }
   
   .section {
-    padding: var(--space-md) 0;
+    padding: var(--space-xs) 0;
+    transform: scale(0.95);
   }
   
   .linktree-container {
-    padding: max(12px, env(safe-area-inset-top)) 10px max(12px, env(safe-area-inset-bottom));
+    padding: max(8px, env(safe-area-inset-top)) 6px max(8px, env(safe-area-inset-bottom));
     justify-content: flex-start;
     height: 100vh;
     height: -webkit-fill-available;
     overflow-y: auto;
-    gap: 8px;
+    gap: 4px;
   }
 
   .card {
-    padding: var(--space-md);
-    margin-bottom: var(--space-sm);
+    padding: var(--space-sm);
+    margin-bottom: 6px;
+    transform: scale(0.95);
   }
 
   .grid {
-    gap: var(--space-sm);
+    gap: 6px;
+  }
+  
+  .section-header {
+    margin-bottom: var(--space-xs);
+  }
+  
+  .flex-column {
+    gap: 6px;
+  }
+  
+  .flex-center, .flex-between {
+    gap: 6px;
   }
 }
 

@@ -69,4 +69,36 @@
     --space-xl: 1.5rem;
     --space-lg: 1rem;
   }
+}
+
+/* Extra Small Mobile Optimizations */
+@media (max-width: 480px) {
+  :root {
+    /* Reduce font sizes */
+    --font-size-3xl: 1.75rem;
+    --font-size-2xl: 1.5rem;
+    --font-size-xl: 1.125rem;
+    --font-size-lg: 1rem;
+    --font-size-md: 0.875rem;
+    --font-size-sm: 0.75rem;
+    --font-size-xs: 0.675rem;
+    
+    /* Reduce spacing by ~50% */
+    --space-3xl: 2rem;
+    --space-2xl: 1.5rem;
+    --space-xl: 1rem;
+    --space-lg: 0.75rem;
+    --space-md: 0.5rem;
+    --space-sm: 0.25rem;
+    --space-xs: 0.125rem;
+    
+    /* Smaller border radius */
+    --border-radius-lg: 8px;
+    --border-radius-md: 6px;
+    --border-radius-sm: 3px;
+    
+    /* Reduced glow effects */
+    --term-glow: 0 0 5px rgba(30, 144, 255, 0.3);
+    --term-glow-strong: 0 0 8px rgba(30, 144, 255, 0.4);
+  }
 } 

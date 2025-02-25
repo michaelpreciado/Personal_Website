@@ -344,59 +344,68 @@
 
 @media (max-width: 480px) {
   .projects-container {
-    padding: var(--space-md);
-    gap: var(--space-sm);
+    padding: var(--space-xs);
+    gap: 4px;
+    transform: scale(0.95);
   }
   
   .project-card {
-    padding: var(--space-md);
-    margin-bottom: var(--space-sm);
-  }
-  
-  .project-title {
-    font-size: var(--font-size-md);
+    padding: 8px;
     margin-bottom: 4px;
   }
   
-  .project-description {
+  .project-title {
     font-size: var(--font-size-sm);
-    margin-bottom: 6px;
+    margin-bottom: 2px;
+  }
+  
+  .project-description {
+    font-size: var(--font-size-xs);
+    margin-bottom: 4px;
   }
   
   .project-tag {
-    padding: 3px 6px;
-    font-size: calc(var(--font-size-xs) - 1px);
+    padding: 2px 4px;
+    font-size: var(--font-size-xs);
+    border-radius: 4px;
   }
   
   .project-link {
-    padding: 6px 10px;
-    font-size: var(--font-size-xs);
+    padding: 4px 8px;
+    font-size: calc(var(--font-size-xs) - 1px);
+    border-radius: 4px;
   }
 
   .project-content {
-    gap: 8px;
+    gap: 4px;
+    transform: scale(0.95);
   }
 
   .project-tags {
-    gap: 4px;
-    margin-bottom: 6px;
+    gap: 3px;
+    margin-bottom: 4px;
   }
 
   .project-links {
-    gap: 6px;
+    gap: 4px;
   }
   
   .dev-placeholder {
-    padding: var(--space-md);
+    padding: var(--space-xs);
+    height: 100px;
   }
   
   .dev-placeholder i {
-    font-size: var(--font-size-lg);
+    font-size: var(--font-size-md);
   }
   
-
   .dev-placeholder span {
-    font-size: 0.8rem;
+    font-size: calc(var(--font-size-xs) - 1px);
+    padding: 2px 4px;
+  }
+  
+  .project-card::before, .project-card::after {
+    opacity: 0.2;
   }
 }
 
