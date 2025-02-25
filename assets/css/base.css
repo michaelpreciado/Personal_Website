@@ -1,0 +1,232 @@
+/* Base Styles and Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  height: 100%;
+  height: -webkit-fill-available;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-mono);
+  line-height: var(--line-height);
+  color: var(--term-text);
+  background-color: var(--term-bg);
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding: calc(var(--safe-area-inset-top) + 60px) var(--space-md) var(--safe-area-inset-bottom);
+  display: flex;
+  flex-direction: column;
+  -webkit-tap-highlight-color: transparent;
+  position: relative;
+  z-index: 1;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0 0 1rem;
+  line-height: 1.2;
+  font-weight: 400;
+  color: var(--term-cyan-bright);
+}
+
+h1 {
+  font-size: var(--font-size-2xl);
+  -webkit-text-stroke: 0.5px;
+}
+
+h2 {
+  font-size: var(--font-size-xl);
+  -webkit-text-stroke: 0.3px;
+}
+
+h3 {
+  font-size: var(--font-size-lg);
+  -webkit-text-stroke: 0.2px;
+}
+
+p {
+  margin: 0 0 1rem;
+  max-width: 65ch;
+}
+
+/* Links */
+a {
+  color: var(--term-cyan);
+  text-decoration: none;
+  transition: var(--transition-fast);
+}
+
+a:hover {
+  color: var(--term-cyan-bright);
+  text-shadow: var(--term-glow);
+}
+
+/* Images */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Container */
+.content-container {
+  width: 100%;
+  max-width: var(--content-width-lg);
+  margin: 0 auto;
+  padding: var(--space-lg);
+}
+
+/* Buttons */
+button {
+  background: none;
+  border: none;
+  font-family: inherit;
+  cursor: pointer;
+  outline: none;
+}
+
+/* Accessibility */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Utility Classes */
+.text-glow {
+  text-shadow: var(--term-glow);
+}
+
+.text-glow-strong {
+  text-shadow: var(--term-glow-strong);
+}
+
+.box-glow {
+  box-shadow: var(--term-glow);
+}
+
+.box-glow-strong {
+  box-shadow: var(--term-glow-strong);
+}
+
+/* iOS Specific Adjustments */
+@supports (-webkit-touch-callout: none) {
+  body {
+    min-height: -webkit-fill-available;
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+}
+
+/* Print Styles */
+@media print {
+  body {
+    background: #fff;
+    color: #000;
+  }
+  
+  .box-glow, .box-glow-strong, .text-glow, .text-glow-strong {
+    text-shadow: none;
+    box-shadow: none;
+  }
+}
+
+/* Mobile optimization for better viewport handling */
+@media (max-width: 480px) {
+  :root {
+    --vh: 1vh;
+  }
+  
+  html, body {
+    height: 100%;
+    overflow: hidden;
+  }
+  
+  body {
+    height: 100vh; /* Fallback */
+    height: calc(var(--vh, 1vh) * 100);
+    padding: calc(var(--safe-area-inset-top) + 40px) 12px var(--safe-area-inset-bottom);
+  }
+  
+  /* Adjust font sizes for mobile */
+  :root {
+    --font-size-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+    --font-size-sm: clamp(0.875rem, 0.8rem + 0.375vw, 1rem);
+    --font-size-md: clamp(1rem, 0.9rem + 0.5vw, 1.125rem);
+    --font-size-lg: clamp(1.125rem, 1rem + 0.75vw, 1.25rem);
+    --font-size-xl: clamp(1.25rem, 1.15rem + 1vw, 1.5rem);
+  }
+}
+
+/* Desktop Optimizations */
+@media (min-width: 1200px) {
+  body {
+    font-size: 18px;
+    line-height: 1.7;
+    padding: calc(var(--safe-area-inset-top) + 80px) var(--space-xl) var(--safe-area-inset-bottom);
+  }
+  
+  h1 {
+    font-size: 2.75rem;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.05em;
+  }
+  
+  h2 {
+    font-size: 2.25rem;
+    margin-bottom: 1.25rem;
+    letter-spacing: 0.04em;
+  }
+  
+  h3 {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+    letter-spacing: 0.03em;
+  }
+  
+  p {
+    margin-bottom: 1.2rem;
+    line-height: 1.7;
+  }
+  
+  .content-container {
+    padding: var(--space-xl);
+    max-width: var(--content-width-xl, 1400px);
+  }
+  
+  /* Enhanced transitions */
+  a, button, .link-card, .project-card, .profile-tag {
+    transition-duration: 0.3s;
+    transition-timing-function: cubic-bezier(0.17, 0.67, 0.83, 0.67);
+  }
+  
+  /* Text hover effects */
+  a:hover {
+    text-shadow: 0 0 8px var(--term-cyan);
+  }
+  
+  /* Smooth animations and transitions */
+  * {
+    transition-property: transform, opacity, color, background-color, box-shadow, border-color;
+    transition-duration: 0.3s;
+  }
+} 

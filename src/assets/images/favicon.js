@@ -1,0 +1,18 @@
+// Base64 encoded favicon data
+// This can be used to generate a favicon.ico file
+
+const faviconData = {
+  // 16x16 favicon with MP initials
+  favicon16: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAABFUlEQVQ4y6WTsUrDUBSGv5ObtCRpJaWDIHQQHJxcBQcfwMnRxcnJJ3DwCRx9A0dxcnTwCRwcHAqCgyAIpWppm9yTmyM0NJY0NT/cw+Fw/o/Dfw7cU5KmaZIkyUOWZS+GYewB2LZdCyHOfd9/rKrqDkDkeX6htX4FEEIIO47jm6ZpnpRSO0KIL9/3L4UQgeu6R1VVnQDEcRzbQRBcG4ZhK6UOm6Y5c13XCsPwNsuyJ9u2D7TWr4ZhbAOYpnmWpum967pHbdvuh2F4VxTFJ7AJvAGrWZbdAOsAQgiR5/mLUmrHsqwvpdS+53knwzD8jKLoBtgAVgDR9/2x1vp5Op0etG27Nk3TJ4DpdHo1juPxf/r+BrLzX9RnKQFKAAAAAElFTkSuQmCC',
+  
+  // 32x32 favicon with MP initials
+  favicon32: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAB+ElEQVRYw+2XvUoDQRDHf3t7l8slF2MIEbQJKFiksLCwsLGx9QEsfAIfwcLax7CxsLGwsLCwEGwECxEJQgQhH3f52N2xyCVGvJir0oGBZXd25v+bmZ0ZOKKcc8o5d+a9f3bOvRhjrgCsteuqelkUxYNz7g7AOOdujTGXqroKICKklLacc/dVVV0YY76Korhwzj0CRFVVbYnIjaquxhjTqOp6jPFaRFZCCDdpmj6p6rqqbojIRlVVV8aYNQDnnGvFGJ9FZEVVGzHGdRFZizE+GWPWrbVrMcZnEVkBGlVdF5G1GOOLtXbNWnuWZdmDqq6KSENVz0MIj8aYFYCU0raIbKjqagjhJqW0nWXZfQjhWkRWgQbQzLLsPsa4ISLbAKq6GkK4V9VVa+1ZCOExhHAtIqtAE2imlLZFZENVV0MINymlbWvtWQjhMYRwLSKrQANohhC2RWRDVVdDCDcppe0sy+5DCNcisgo0gWZKaVtENlR1NYRwk1LazvP8PoRwLSKrQANoppS2RWRDVVdDCDcppe08z+9DCNcisgo0gGZKaVtENlR1NYRwk1LazvP8PoRwLSKrQANohhC2RWRDVVdDCDcppe08z+9DCNcisgo0gGZKaVtENlR1NYRwk1LazvP8PoRwLSKrQANohhC2RWRDVVdDCDcppe08z+9DCNcisgo0gOZ/+/4GZJRwbkLPzf0AAAAASUVORK5CYII='
+};
+
+// For use in React components
+export { faviconData };
+
+// For use in Node.js scripts
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = { faviconData };
+} 

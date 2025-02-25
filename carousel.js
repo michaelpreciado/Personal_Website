@@ -2,6 +2,24 @@ export class ProjectCarousel {
     constructor() {
         this.track = document.querySelector('.projects-track');
         this.cards = Array.from(this.track?.getElementsByClassName('project-card') || []);
+        
+        // Initialize state object with touch properties
+        this.state = {
+            currentIndex: 0,
+            touch: {
+                startY: 0,
+                lastY: 0,
+                lastTime: 0,
+                offset: 0,
+                velocity: 0
+            }
+        };
+        
+        // Define touch configuration constants
+        this.TOUCH_CONFIG = {
+            threshold: 30 // Minimum swipe distance to trigger navigation
+        };
+        
         // ... rest of carousel code ...
     }
     // ... existing carousel methods ...
@@ -32,7 +50,7 @@ export class ProjectCarousel {
         }
 
         // Only prevent default if the swipe is significant enough to navigate
-        if (Math.abs(this.state.touch.offset) > TOUCH_CONFIG.threshold) {
+        if (Math.abs(this.state.touch.offset) > this.TOUCH_CONFIG.threshold) {
             e.preventDefault();
         }
 

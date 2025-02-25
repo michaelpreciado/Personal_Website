@@ -918,8 +918,15 @@ code, pre {
     line-height: 1.6;
     margin: 20px auto;
     max-width: 600px;
-    padding: 0 16px;
+    padding: 16px;
     font-family: 'Consolas', monospace;
+    background: rgba(0, 10, 16, 0.7);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border-radius: 8px;
+    border: 1px solid var(--term-cyan-dark);
+    box-shadow: var(--term-glow);
+    text-align: center;
 }
 
 /* Mobile Optimizations */

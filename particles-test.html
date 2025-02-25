@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Particles.js Test</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #001215;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        .content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding-top: 20vh;
+        }
+        
+        h1 {
+            color: #1E90FF;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1>Particles.js Test</h1>
+        <p>If you can see particles in the background, it's working!</p>
+    </div>
+    
+    <div id="particles-js"></div>
+    
+    <script src="assets/js/lib/particles.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded, initializing particles');
+            
+            particlesJS('particles-js', {
+                particles: {
+                    number: {
+                        value: 120,
+                        density: {
+                            enable: true,
+                            value_area: 800
+                        }
+                    },
+                    color: {
+                        value: "#1E90FF"
+                    },
+                    shape: {
+                        type: "circle"
+                    },
+                    opacity: {
+                        value: 0.8,
+                        random: false
+                    },
+                    size: {
+                        value: 4,
+                        random: true
+                    },
+                    line_linked: {
+                        enable: true,
+                        distance: 150,
+                        color: "#1E90FF",
+                        opacity: 0.6,
+                        width: 1.5
+                    },
+                    move: {
+                        enable: true,
+                        speed: 3,
+                        direction: "none",
+                        random: true,
+                        straight: false,
+                        out_mode: "bounce",
+                        bounce: true
+                    }
+                },
+                interactivity: {
+                    detect_on: "canvas",
+                    events: {
+                        onhover: {
+                            enable: true,
+                            mode: "grab"
+                        },
+                        onclick: {
+                            enable: true,
+                            mode: "push"
+                        },
+                        resize: true
+                    }
+                },
+                retina_detect: true
+            });
+            
+            console.log('Particles initialized');
+        });
+    </script>
+</body>
+</html> 

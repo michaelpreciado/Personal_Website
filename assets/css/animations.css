@@ -1,0 +1,240 @@
+/* Text Animations */
+@keyframes textGlitch {
+    0% { 
+        text-shadow: 0 0 8px var(--term-cyan);
+        clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+    }
+    50% { 
+        text-shadow: 2px 2px 8px var(--term-cyan-dark);
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    }
+    98% {
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    }
+    100% {
+        text-shadow: -2px -2px 8px var(--term-cyan-bright);
+        opacity: 0;
+    }
+}
+
+@keyframes typeEffect {
+    0% { 
+        width: 0;
+        opacity: 0;
+    }
+    1% {
+        opacity: 1;
+    }
+    100% {
+        width: 100%;
+        opacity: 1;
+    }
+}
+
+@keyframes cursorBlink {
+    0%, 100% { opacity: 0 }
+    50% { opacity: 1 }
+}
+
+@keyframes scanEffect {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 100px; }
+}
+
+@keyframes glowPulse {
+    0% { box-shadow: 0 0 5px var(--term-cyan-dim); }
+    50% { box-shadow: 0 0 20px var(--term-cyan); }
+    100% { box-shadow: 0 0 5px var(--term-cyan-dim); }
+}
+
+@keyframes scanTV {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(100%); }
+}
+
+@keyframes lineGlitch {
+    0% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    2% {
+        transform: translateX(2px);
+        opacity: 0.8;
+    }
+    4% {
+        transform: translateX(-2px);
+    }
+    6% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scanline {
+    from { transform: translateY(-100%); }
+    to { transform: translateY(100%); }
+}
+
+/* Utility Animation Classes */
+.animate-fade-in {
+    animation: fadeIn 0.3s ease-out forwards;
+}
+
+.animate-blink {
+    animation: cursorBlink 1s infinite;
+}
+
+.animate-glitch {
+    animation: lineGlitch 6s infinite;
+}
+
+.type-cursor {
+    position: absolute;
+    right: 0;
+    animation: cursorBlink 1s infinite;
+    opacity: 0;
+}
+
+/* Apply to all cyan elements */
+[class*="term-cyan"], 
+.border-cyan,
+.glow-cyan {
+    animation: lineGlitch 6s infinite;
+    position: relative;
+}
+
+/* Media Queries */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Enhanced animations for Desktop */
+@media (min-width: 1200px) {
+  /* Enhanced fade in animation */
+  @keyframes enhancedFadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(30px) scale(0.95);
+    }
+    60% {
+      opacity: 0.8;
+      transform: translateY(-5px) scale(1.02);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  /* Enhanced glow pulse animation */
+  @keyframes enhancedGlowPulse {
+    0% {
+      box-shadow: 0 0 5px rgba(30, 144, 255, 0.5);
+    }
+    50% {
+      box-shadow: 0 0 25px rgba(30, 144, 255, 0.8), 0 0 10px rgba(0, 230, 255, 0.6);
+    }
+    100% {
+      box-shadow: 0 0 5px rgba(30, 144, 255, 0.5);
+    }
+  }
+
+  /* Enhanced typewriter animation */
+  @keyframes enhancedTypewriter {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
+
+  @keyframes enhancedCursorBlink {
+    0%, 75% {
+      opacity: 1;
+    }
+    76%, 100% {
+      opacity: 0;
+    }
+  }
+
+  /* Apply enhanced animations to elements */
+  .section {
+    animation: enhancedFadeIn 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  }
+
+  #profile-section h1,
+  #profile-section .bio,
+  .section-header {
+    animation-name: enhancedFadeIn;
+    animation-duration: 1.5s;
+    animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .profile-image {
+    animation: enhancedFadeIn 1.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), 
+               enhancedGlowPulse 4s ease-in-out infinite;
+  }
+
+  /* Staggered entrance for link cards */
+  .link-card {
+    animation: enhancedFadeIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    animation-fill-mode: both;
+  }
+
+  /* Apply different delays to each link card */
+  .link-card:nth-child(1) { animation-delay: 0.1s; }
+  .link-card:nth-child(2) { animation-delay: 0.2s; }
+  .link-card:nth-child(3) { animation-delay: 0.3s; }
+  .link-card:nth-child(4) { animation-delay: 0.4s; }
+  .link-card:nth-child(5) { animation-delay: 0.5s; }
+  .link-card:nth-child(6) { animation-delay: 0.6s; }
+  .link-card:nth-child(7) { animation-delay: 0.7s; }
+  .link-card:nth-child(8) { animation-delay: 0.8s; }
+  
+  /* Apply typewriter effect to bio description if it exists */
+  .bio-description.typewriter {
+    display: inline-block;
+    overflow: hidden;
+    border-right: 3px solid var(--term-cyan);
+    white-space: nowrap;
+    margin: 0 auto;
+    animation: 
+      enhancedTypewriter 4s steps(40, end),
+      enhancedCursorBlink 0.75s step-end infinite;
+  }
+  
+  /* Smooth scroll behavior */
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* Back to top button animation */
+  #back-to-top {
+    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  
+  #back-to-top:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 20px rgba(30, 144, 255, 0.8);
+  }
+} 

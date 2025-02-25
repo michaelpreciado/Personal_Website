@@ -1,0 +1,72 @@
+:root {
+  /* Color Palette */
+  --term-bg: #000a10; /* Darker background for better contrast */
+  --term-bg-light: #00171c;
+  --term-text: #e0e0e0;
+  --term-cyan: #1E90FF; /* Dodger Blue */
+  --term-cyan-bright: #39A5FF; /* Brighter Dodger Blue */
+  --term-cyan-dim: #0077EA; /* Dimmer Dodger Blue */
+  --term-cyan-dark: #0055A4; /* Darker Dodger Blue */
+  
+  /* Typography */
+  --font-mono: 'Share Tech Mono', monospace, Consolas, 'Courier New', monospace;
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.25rem;
+  --font-size-xl: 1.5rem;
+  --font-size-2xl: 2rem;
+  --font-size-3xl: 2.5rem;
+  --line-height: 1.6;
+  
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 5rem;
+  
+  /* Effects */
+  --term-glow: 0 0 10px rgba(30, 144, 255, 0.3); /* Updated to Dodger Blue */
+  --term-glow-strong: 0 0 15px rgba(30, 144, 255, 0.5); /* Updated to Dodger Blue */
+  --scanline-size: 2px;
+  
+  /* Timing */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+  
+  /* Layout */
+  --content-width-sm: 640px;
+  --content-width-md: 768px;
+  --content-width-lg: 1024px;
+  --content-width-xl: 1280px;
+  --border-radius-sm: 4px;
+  --border-radius-md: 8px;
+  --border-radius-lg: 12px;
+}
+
+/* Dark Mode Variables */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --term-bg: #000d10;
+    --term-bg-light: #001215;
+    --term-glow: 0 0 12px rgba(30, 144, 255, 0.4); /* Updated to Dodger Blue */
+    --term-glow-strong: 0 0 18px rgba(30, 144, 255, 0.6); /* Updated to Dodger Blue */
+  }
+}
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+  :root {
+    --font-size-2xl: 1.75rem;
+    --font-size-xl: 1.25rem;
+    --space-3xl: 3rem;
+    --space-2xl: 2rem;
+    --space-xl: 1.5rem;
+    --space-lg: 1rem;
+  }
+} 

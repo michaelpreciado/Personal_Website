@@ -3,18 +3,37 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#1E90FF">
     <title>Projects - Michael Preciado</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="header.css">
-    <link rel="stylesheet" href="projects.css">
+    
+    <!-- Preload critical assets -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" as="style">
+    <link rel="preload" href="./assets/js/lib/particles.min.js" as="script">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Fonts and Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" 
+          crossorigin="anonymous" referrerpolicy="no-referrer">
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    
+    <!-- CSS - load in correct order for cascade -->
+    <link rel="stylesheet" href="assets/css/variables.css">
+    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/animations.css">
+    <link rel="stylesheet" href="assets/css/layout.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/header.css">
+    <link rel="stylesheet" href="assets/css/projects.css">
 </head>
 
 <body>
+    <!-- Background Effects -->
+    <div id="particles-js"></div>
+    
     <main class="linktree-container">
         <!-- Profile Section -->
         <section class="profile-section">
@@ -78,12 +97,10 @@
         </a>
     </main>
 
-    <!-- Background Effects -->
-    <div id="particles-js"></div>
-
-    <!-- Scripts -->
-    <script src='https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js'></script>
-    <script src="./script.js"></script>
+    <!-- Scripts - Use optimized script loading -->
+    <script src="assets/js/lib/particles.min.js"></script>
+    <script src="assets/js/particles.js"></script>
+    <script src="assets/js/index.js"></script>
 </body>
 
 </html> 

@@ -6,152 +6,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#1E90FF">
     <title>Michael Preciado - Software Developer</title>
     
     <!-- Preload critical assets -->
-    <link rel="preload" href="style.css" as="style">
-    <link rel="preload" href="header.css" as="style">
-    <link rel="preload" href="home.css" as="style">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" as="style">
+    <link rel="preload" href="./assets/js/lib/particles.min.js" as="script">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     
     <!-- Fonts and Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" 
           crossorigin="anonymous" referrerpolicy="no-referrer">
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
     
-    <!-- Custom Styles -->
-    <style>
-        @font-face {
-            font-family: 'Consolas';
-            src: local('Consolas');
-            font-display: swap;
-        }
-
-        /* iOS-specific optimizations */
-        @supports (-webkit-touch-callout: none) {
-            body {
-                min-height: -webkit-fill-available;
-                padding-top: env(safe-area-inset-top);
-                padding-bottom: env(safe-area-inset-bottom);
-                padding-left: env(safe-area-inset-left);
-                padding-right: env(safe-area-inset-right);
-            }
-        }
-
-        .job-ready-description [data-type-effect] {
-            min-height: 6em;  /* Adjust based on your content */
-            font-size: 0.9em;
-            line-height: 1.4;
-        }
-
-        .type-cursor {
-            display: inline-block;
-            width: 3px;
-            background: #fff;
-            margin-left: 2px;
-            animation: blink 1s infinite;
-        }
-
-        .contactButton {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1000;
-            padding: 12px 20px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        }
-
-        @media (min-width: 769px) {
-            .contactButton {
-                bottom: 40px;
-                right: 50%;
-                transform: translateX(50%);
-            }
-        }
-
-        @media (max-width: 480px) {
-            .contactButton {
-                padding: 10px 16px;
-                font-size: 14px;
-                right: 10px;
-                bottom: 10px;
-                border-radius: 24px;
-            }
-        }
-
-        /* Typing animation container */
-        .type-effect {
-            position: relative;
-            display: inline-block;
-            padding-right: 8px; /* Space for cursor */
-        }
-
-        .type-effect::after {
-            content: '|';
-            position: absolute;
-            right: 0;
-            animation: blink 1s infinite;
-        }
-
-        @keyframes blink {
-            0%, 100% { opacity: 0 }
-            50% { opacity: 1 }
-        }
-
-        /* Mobile-specific adjustments */
-        @media (max-width: 768px) {
-            .type-effect {
-                font-size: 1.1rem; /* Adjust based on your design */
-                line-height: 1.4;
-                padding-right: 6px;
-            }
-            
-            .type-effect::after {
-                right: -2px; /* Fine-tune cursor position */
-                font-size: 1.05rem;
-            }
-            
-            /* Ensure container has proper width */
-            .type-container {
-                width: 90% !important;
-                margin: 0 auto !important;
-            }
-        }
-    </style>
-    
-    <!-- Main Stylesheets -->
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="header.css">
-    <link rel="stylesheet" href="home.css">
+    <!-- CSS - load in correct order for cascade -->
+    <link rel="stylesheet" href="assets/css/variables.css">
+    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/animations.css">
+    <link rel="stylesheet" href="assets/css/layout.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/header.css">
+    <link rel="stylesheet" href="assets/css/custom.css">
+    <link rel="stylesheet" href="assets/css/projects.css">
 </head>
 
 <body>
     <main class="linktree-container">
         <!-- Profile Section -->
-        <section class="profile-section">
+        <section class="profile-section" id="profile-section">
             <div class="profile-image">
                 <img src="./public/blue.jpeg" 
                      alt="Michael Preciado" 
                      loading="lazy"
-                     onerror="this.onerror=null; this.src='./public/blue.jpeg'; console.log('Primary image failed, trying fallback');"
-                     onload="console.log('Image loaded successfully');">
+                     onerror="this.onerror=null; this.src='./public/blue.jpeg';">
             </div>
             <h1>Michael Preciado</h1>
-            <p class="bio">Software & AI Solutions | Air Force Veteran</p>
+            <p class="bio">Software & AI Solutions</p>
             
             <!-- Profile Tags -->
             <div class="profile-tags">
-                <span class="profile-tag">
-                    <i class="fas fa-fighter-jet"></i>
-                    Air Force Veteran
-                </span>
                 <span class="profile-tag">
                     <i class="fas fa-microchip"></i>
                     Tech Enthusiast
                 </span>
                 <span class="profile-tag">
                     <i class="fas fa-code"></i>
-                    Full-Stack Developer
+                    AI Software Engineer
                 </span>
                 <span class="profile-tag">
                     <i class="fas fa-database"></i>
@@ -159,7 +60,11 @@
                 </span>
                 <span class="profile-tag">
                     <i class="fas fa-robot"></i>
-                    AI Implementation
+                    AI Tools
+                </span>
+                <span class="profile-tag">
+                    <i class="fas fa-fighter-jet"></i>
+                    Air Force Veteran
                 </span>
             </div>
 
@@ -170,14 +75,10 @@
         </section>
 
         <!-- Links Section -->
-        <section class="links-section">
-            <!-- Projects Link -->
-            <a href="projects.html" class="link-card">
-                <i class="fas fa-folder-open"></i>
-                <span>View My Projects</span>
-                <i class="fas fa-chevron-right"></i>
-            </a>
-
+        <section class="links-section" id="links-section">
+            <div class="section-header">
+                <h2>Connect With Me</h2>
+            </div>
             <!-- GitHub -->
             <a href="https://github.com/michaelpreciado" target="_blank" rel="noopener noreferrer" class="link-card">
                 <i class="fab fa-github"></i>
@@ -221,6 +122,68 @@
             </a>
         </section>
 
+        <!-- Projects Section -->
+        <section class="projects-section" id="projects-section">
+            <div class="section-header">
+                <h1>My Projects</h1>
+                <p class="bio">A collection of my recent work</p>
+            </div>
+            
+            <div class="projects-container">
+                <!-- Neural Network Project -->
+                <article class="project-card">
+                    <div class="project-content">
+                        <h2 class="project-title">Visual Neural Network</h2>
+                        <p class="project-description">Interactive tool for neural network visualization.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">D3.js</span>
+                            <span class="project-tag">TensorFlow.js</span>
+                            <span class="project-tag">Neural Networks</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/michaelpreciado/Neural_Network_Visualizer" class="project-link" target="_blank">
+                                <i class="fab fa-github"></i>
+                                <span>View Code</span>
+                            </a>
+                            <a href="#" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>
+                                <span>Live Demo</span>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Photography Portfolio -->
+                <article class="project-card">
+                    <div class="project-content">
+                        <h2 class="project-title">Photography Portfolio</h2>
+                        <p class="project-description">Minimalist photography showcase.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">React</span>
+                            <span class="project-tag">Next.js</span>
+                            <span class="project-tag">Framer Motion</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="https://github.com/michaelpreciado/mario.preciado.photography" class="project-link" target="_blank">
+                                <i class="fab fa-github"></i>
+                                <span>View Code</span>
+                            </a>
+                            <a href="https://michaelpreciado.github.io/mario.preciado.photography/" class="project-link">
+                                <i class="fas fa-external-link-alt"></i>
+                                <span>Live Demo</span>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Back to Top Button - Moved outside the projects section -->
+        <button class="contact-button" id="back-to-top">
+            <i class="fas fa-chevron-up"></i>
+            <span>Back to Top</span>
+        </button>
+
         <!-- Contact Button -->
         <button class="contact-button" onclick="toggleSidebar()">
             <i class="fas fa-envelope"></i>
@@ -252,9 +215,11 @@
     <!-- Background Effects -->
     <div id="particles-js"></div>
 
-    <!-- Scripts -->
-    <script src='https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js'></script>
-    <script src="./script.js"></script>
+    <!-- Scripts - Use optimized script loading -->
+    <script src="assets/js/lib/particles.min.js"></script>
+    <script src="assets/js/particles.js"></script>
+    <script src="assets/js/index.js"></script>
+    <script src="assets/js/scroll-animations.js"></script>
 </body>
 
 </html>
