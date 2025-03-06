@@ -17,6 +17,26 @@
     }
 }
 
+@keyframes letterAppear {
+    0% {
+        opacity: 0;
+        transform: translateY(5px);
+        color: var(--term-cyan-bright);
+        text-shadow: 0 0 8px var(--term-cyan);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+        color: inherit;
+        text-shadow: none;
+    }
+}
+
+.letter-animated {
+    display: inline-block;
+    animation: letterAppear 0.2s ease-out forwards;
+}
+
 @keyframes typeEffect {
     0% { 
         width: 0;
@@ -214,13 +234,15 @@
   /* Apply typewriter effect to bio description if it exists */
   .bio-description.typewriter {
     display: inline-block;
-    overflow: hidden;
+    overflow: visible;
     border-right: 3px solid var(--term-cyan);
-    white-space: nowrap;
+    white-space: normal;
     margin: 0 auto;
     animation: 
       enhancedTypewriter 4s steps(40, end),
       enhancedCursorBlink 0.75s step-end infinite;
+    word-wrap: break-word;
+    height: auto;
   }
   
   /* Smooth scroll behavior */

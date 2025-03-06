@@ -210,18 +210,60 @@ document.addEventListener('DOMContentLoaded', function() {
   addSidebarParticles();
 });
 
-// Simple text reveal function as backup
-function simpleTextReveal() {
-  const textElements = document.querySelectorAll('h1, h2, .bio, .bio-description, .project-title, .project-description, .profile-tag, .link-card span');
-  
-  // Make all elements visible immediately
-  textElements.forEach(el => {
+// Function to ensure all text is visible
+function ensureTextVisibility() {
+  // Make all text elements visible
+  document.querySelectorAll('h1, h2, .bio, .project-title, .project-description, .link-card span').forEach(el => {
     el.style.visibility = 'visible';
     el.style.opacity = '1';
-    el.classList.add('text-reveal');
   });
   
-  console.log('Using simple text reveal animation');
+  // Use the profile tags handler if available
+  if (typeof window.ensureProfileTags === 'function') {
+    window.ensureProfileTags();
+  }
+}
+
+// Function to animate text letter by letter
+function animateTextLetterByLetter() {
+  // Get all text elements
+  const textElements = document.querySelectorAll('h1, h2, .bio, .bio-description, .project-title, .project-description, .link-card span');
+  
+  // Process each element
+  textElements.forEach(element => {
+    // Skip elements that should not be animated
+    if (element.classList.contains('no-animate') || 
+        element.classList.contains('typewriter') || 
+        element.closest('.terminal-container') || 
+        element.closest('.ts-loading-screen')) {
+      return;
+    }
+    
+    // Make sure the element is visible
+    element.style.visibility = 'visible';
+    element.style.opacity = '1';
+    
+    // Get the text content
+    const text = element.textContent.trim();
+    if (!text) return;
+    
+    // Create a span for each letter
+    const letters = text.split('').map(letter => {
+      const span = document.createElement('span');
+      span.textContent = letter;
+      span.style.opacity = '1';
+      return span;
+    });
+    
+    // Clear the element and append the letter spans
+    element.textContent = '';
+    letters.forEach(span => element.appendChild(span));
+  });
+  
+  // Use the profile tags handler if available
+  if (typeof window.ensureProfileTags === 'function') {
+    window.ensureProfileTags();
+  }
 }
 
 // Toggle sidebar function

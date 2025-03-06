@@ -68,6 +68,15 @@
     --space-2xl: 2rem;
     --space-xl: 1.5rem;
     --space-lg: 1rem;
+    
+    /* Adjust border radius for better mobile appearance */
+    --border-radius-lg: 10px;
+    --border-radius-md: 7px;
+    --border-radius-sm: 4px;
+    
+    /* Reduce glow effects slightly for better performance */
+    --term-glow: 0 0 8px rgba(30, 144, 255, 0.3);
+    --term-glow-strong: 0 0 12px rgba(30, 144, 255, 0.5);
   }
 }
 
@@ -92,6 +101,9 @@
     --space-sm: 0.25rem;
     --space-xs: 0.125rem;
     
+    /* Extra small spacing for tight layouts */
+    --space-xxs: 0.0625rem;
+    
     /* Smaller border radius */
     --border-radius-lg: 8px;
     --border-radius-md: 6px;
@@ -100,5 +112,43 @@
     /* Reduced glow effects */
     --term-glow: 0 0 5px rgba(30, 144, 255, 0.3);
     --term-glow-strong: 0 0 8px rgba(30, 144, 255, 0.4);
+    
+    /* Faster transitions for more responsive feel */
+    --transition-fast: 0.1s ease;
+    --transition-normal: 0.2s ease;
+    --transition-slow: 0.3s ease;
+    
+    /* Safe area insets for notched devices */
+    --safe-area-inset-top: env(safe-area-inset-top, 0px);
+    --safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
+    --safe-area-inset-left: env(safe-area-inset-left, 0px);
+    --safe-area-inset-right: env(safe-area-inset-right, 0px);
+  }
+}
+
+/* Small phones optimization */
+@media (max-width: 375px) {
+  :root {
+    /* Further reduce font sizes */
+    --font-size-3xl: 1.5rem;
+    --font-size-2xl: 1.25rem;
+    --font-size-xl: 1rem;
+    --font-size-lg: 0.875rem;
+    --font-size-md: 0.75rem;
+    --font-size-sm: 0.675rem;
+    --font-size-xs: 0.625rem;
+    
+    /* Further reduce spacing */
+    --space-3xl: 1.5rem;
+    --space-2xl: 1.25rem;
+    --space-xl: 0.875rem;
+    --space-lg: 0.625rem;
+    --space-md: 0.375rem;
+    --space-sm: 0.1875rem;
+    --space-xs: 0.0625rem;
+    
+    /* Minimal glow effects for performance */
+    --term-glow: 0 0 3px rgba(30, 144, 255, 0.25);
+    --term-glow-strong: 0 0 5px rgba(30, 144, 255, 0.35);
   }
 } 

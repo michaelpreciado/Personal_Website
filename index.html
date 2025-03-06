@@ -9,6 +9,7 @@
     <meta name="theme-color" content="#001215">
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-title" content="Michael Preciado">
+    <meta name="text-size-adjust" content="100%">
     <title>Michael Preciado - Software Developer</title>
     
     <!-- Preload critical assets -->
@@ -56,6 +57,20 @@
                 if (loadingScreen) {
                     loadingScreen.classList.add('hidden');
                 }
+                
+                // Ensure profile tags are visible
+                document.querySelectorAll('.profile-tag').forEach(function(tag) {
+                    tag.style.visibility = 'visible';
+                    tag.style.opacity = '1';
+                    // Make sure the text inside is visible too
+                    Array.from(tag.childNodes).forEach(function(node) {
+                        if (node.nodeType === 3) { // Text node
+                            if (node.textContent.trim() === '' && tag.getAttribute('data-content')) {
+                                node.textContent = tag.getAttribute('data-content');
+                            }
+                        }
+                    });
+                });
             }, 2000); // 2 second fallback (reduced from 5 seconds)
         });
         
@@ -77,6 +92,16 @@
             if (bioDescription && bioDescription.textContent.trim() === '' && bioDescription.getAttribute('data-type-effect')) {
                 bioDescription.textContent = bioDescription.getAttribute('data-type-effect');
             }
+            
+            // Ensure profile tags have content
+            document.querySelectorAll('.profile-tag').forEach(function(tag) {
+                tag.style.visibility = 'visible';
+                tag.style.opacity = '1';
+                // Make sure the text inside is visible too
+                if (tag.textContent.trim() === '' && tag.getAttribute('data-content')) {
+                    tag.textContent = tag.getAttribute('data-content');
+                }
+            });
         }, 5000);
     </script>
     
@@ -87,6 +112,42 @@
             visibility: visible !important;
             opacity: 1 !important;
             transition: none !important;
+        }
+        
+        /* Profile tags specific styles */
+        .profile-tag {
+            visibility: visible !important;
+            opacity: 1 !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            white-space: normal !important;
+            word-wrap: break-word !important;
+            overflow-wrap: break-word !important;
+            max-width: 100% !important;
+            flex-wrap: wrap !important;
+            justify-content: center !important;
+            text-align: center !important;
+        }
+        
+        .profile-tag i {
+            margin-right: 8px !important;
+            flex-shrink: 0 !important;
+        }
+        
+        /* Bio description specific styles */
+        .bio-description {
+            visibility: visible !important;
+            opacity: 1 !important;
+            white-space: normal !important;
+            word-wrap: break-word !important;
+            overflow-wrap: break-word !important;
+            overflow: visible !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            display: block !important;
+            text-align: center !important;
+            padding: 0 15px !important;
+            margin: 0 auto !important;
         }
         
         /* Hide these styles after JavaScript loads */
@@ -195,32 +256,27 @@
             <p class="bio">Software & AI Solutions</p>
             
             <!-- Profile Tags -->
-            <div class="profile-tags">
-                <span class="profile-tag">
+            <div class="profile-tags" id="profile-tags-container">
+                <span class="profile-tag" id="tag-tech" data-content="Tech Enthusiast">
                     <i class="fas fa-microchip"></i>
-                    Tech Enthusiast
                 </span>
-                <span class="profile-tag">
+                <span class="profile-tag" id="tag-ai-engineer" data-content="AI Software Engineer">
                     <i class="fas fa-code"></i>
-                    AI Software Engineer
                 </span>
-                <span class="profile-tag">
+                <span class="profile-tag" id="tag-data" data-content="Data Analyst">
                     <i class="fas fa-database"></i>
-                    Data Analyst
                 </span>
-                <span class="profile-tag">
+                <span class="profile-tag" id="tag-ai-tools" data-content="AI Tools">
                     <i class="fas fa-robot"></i>
-                    AI Tools
                 </span>
-                <span class="profile-tag">
+                <span class="profile-tag" id="tag-veteran" data-content="Air Force Veteran">
                     <i class="fas fa-fighter-jet"></i>
-                    Air Force Veteran
                 </span>
             </div>
 
             <!-- Bio Description -->
-            <p class="bio-description" data-type-effect="Passionate about leveraging technology to solve real-world problems. Seeking opportunities to contribute to innovative projects and grow within a dynamic team.">
-                Passionate about leveraging technology to solve real-world problems. Seeking opportunities to contribute to innovative projects and grow within a dynamic team.
+            <p class="bio-description" data-type-effect="Innovative software developer with a deep passion for AI integration and emerging technologies. Experienced in developing scalable solutions while actively exploring cutting-edge AI applications for business optimization. Eager to collaborate with forward-thinking companies to transform ideas into impactful solutions.">
+                Innovative software developer with a deep passion for AI integration and emerging technologies. Experienced in developing scalable solutions while actively exploring cutting-edge AI applications for business optimization. Eager to collaborate with forward-thinking companies to transform ideas into impactful solutions.
             </p>
         </section>
 
@@ -413,73 +469,55 @@
     <div id="particles-js" class="fullscreen-bg"></div>
 
     <!-- Scripts - Use optimized script loading -->
+    <script src="assets/js/text-fallback.js"></script>
     <script src="assets/js/lib/particles.min.js"></script>
     <script src="assets/js/particles.js"></script>
     <script src="assets/js/loading.js"></script>
+    <script src="assets/js/profile-tags.js"></script>
     <script src="assets/js/index.js"></script>
     <script src="assets/js/scroll-animations.js"></script>
     
     <!-- Responsive layout script -->
     <script>
-        // Optimize layout for wide screens while maintaining vertical arrangement
+        // Optimize layout for all screen sizes while maintaining vertical arrangement
         function optimizeForScreenSize() {
-            const isWideScreen = window.innerWidth > 1600;
-            const isUltraWideScreen = window.innerWidth > 2560;
-            const isSuperUltraWideScreen = window.innerWidth > 3440;
             const container = document.querySelector('.linktree-container');
             
             // Remove all screen size classes
             container.classList.remove('widescreen-layout', 'ultrawide-layout', 'super-ultrawide-layout');
+            document.body.classList.remove('ultrawide-body', 'super-ultrawide-body');
             
-            // Apply appropriate class based on screen width
-            if (isSuperUltraWideScreen) {
-                container.classList.add('widescreen-layout', 'ultrawide-layout', 'super-ultrawide-layout');
-                document.body.classList.add('super-ultrawide-body');
-            } else if (isUltraWideScreen) {
-                container.classList.add('widescreen-layout', 'ultrawide-layout');
-                document.body.classList.add('ultrawide-body');
-            } else if (isWideScreen) {
-                container.classList.add('widescreen-layout');
-                document.body.classList.remove('ultrawide-body', 'super-ultrawide-body');
-            } else {
-                document.body.classList.remove('ultrawide-body', 'super-ultrawide-body');
-            }
-            
-            // Ensure proper spacing for vertical layout
+            // Force vertical layout for all screen sizes
             const sections = document.querySelectorAll('section');
-            sections.forEach((section, index) => {
-                if (index > 0) {
-                    const spacing = isUltraWideScreen ? '60px' : (isWideScreen ? '40px' : '');
-                    section.style.marginTop = spacing;
-                }
+            sections.forEach(section => {
+                section.style.width = '100%';
+                section.style.maxWidth = '600px';
+                section.style.marginLeft = 'auto';
+                section.style.marginRight = 'auto';
+                section.style.marginBottom = '40px';
             });
             
-            // Center particles canvas for ultrawide displays
-            if (isUltraWideScreen || isSuperUltraWideScreen) {
-                const particlesCanvas = document.querySelector('#particles-js canvas');
-                if (particlesCanvas) {
-                    // Force canvas to fill entire viewport width
-                    particlesCanvas.style.width = '100vw';
-                    particlesCanvas.style.position = 'fixed';
-                    particlesCanvas.style.left = '0';
-                }
+            // Set projects container to vertical layout
+            const projectsContainer = document.querySelector('.projects-container');
+            if (projectsContainer) {
+                projectsContainer.style.display = 'flex';
+                projectsContainer.style.flexDirection = 'column';
+                projectsContainer.style.width = '100%';
+                projectsContainer.style.maxWidth = '600px';
+                projectsContainer.style.margin = '0 auto';
             }
+            
+            // Set project cards to full width
+            const projectCards = document.querySelectorAll('.project-card');
+            projectCards.forEach(card => {
+                card.style.width = '100%';
+                card.style.maxWidth = '100%';
+            });
         }
         
         // Run on load and resize
         window.addEventListener('load', optimizeForScreenSize);
         window.addEventListener('resize', optimizeForScreenSize);
-        
-        // Extra optimization for ultrawide displays - recenter on scroll
-        if (window.innerWidth > 2560) {
-            window.addEventListener('scroll', function() {
-                const container = document.querySelector('.linktree-container');
-                if (container) {
-                    // Ensure container stays centered
-                    container.style.margin = '0 auto';
-                }
-            });
-        }
     </script>
     
     <!-- iOS Optimizations -->

@@ -65,31 +65,31 @@
   text-align: center;
 }
 
-/* Grids */
+/* Grids - Modified to ensure vertical single column layout */
 .grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  display: flex;
+  flex-direction: column;
   gap: var(--space-lg);
   width: 100%;
 }
 
 .grid-2col {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  flex-direction: column;
   gap: var(--space-md);
 }
 
 .grid-3col {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-direction: column;
   gap: var(--space-md);
 }
 
 /* Flexbox Layouts */
 .flex-row {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  flex-direction: column;
+  flex-wrap: nowrap;
   gap: var(--space-md);
 }
 
@@ -123,46 +123,50 @@
 /* Responsive Adjustments */
 @media (max-width: 768px) {
   .grid-3col {
-    grid-template-columns: repeat(2, 1fr);
+    display: flex;
+    flex-direction: column;
   }
   
   .grid-2col {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
   }
   
   .section {
     padding: var(--space-xl) 0;
   }
+  
+  .linktree-container {
+    padding: max(20px, env(safe-area-inset-top)) 12px max(20px, env(safe-area-inset-bottom));
+  }
 }
 
 @media (max-width: 480px) {
   .grid-3col {
-    grid-template-columns: 1fr;
-    gap: var(--space-xs);
+    display: flex;
+    flex-direction: column;
   }
   
   .flex-row {
     flex-direction: column;
-    gap: 4px;
   }
   
   .section {
-    padding: var(--space-xs) 0;
-    margin-bottom: 5px;
+    padding: var(--space-lg) 0;
   }
   
   .card {
-    padding: var(--space-sm);
-    margin-bottom: var(--space-xs);
+    padding: var(--space-md);
+    margin-bottom: var(--space-sm);
     border-radius: var(--border-radius-sm);
   }
   
   .section-header {
-    margin-bottom: var(--space-sm);
+    margin-bottom: var(--space-lg);
   }
   
   .grid {
-    gap: var(--space-xs);
+    gap: var(--space-md);
   }
   
   /* Tighten spacing for all elements */
@@ -180,49 +184,92 @@
     padding: max(15px, env(safe-area-inset-top)) 10px max(15px, env(safe-area-inset-bottom));
     justify-content: flex-start;
     gap: 10px;
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  /* Improve touch targets */
+  .flex-between, .flex-center {
+    gap: 8px;
   }
 }
 
-/* Desktop Optimizations */
-@media (min-width: 1200px) {
+/* Small phones optimization */
+@media (max-width: 375px) {
   .linktree-container {
-    max-width: 1080px;
-    padding: 32px;
-    justify-content: center;
-    gap: 48px;
+    padding: max(10px, env(safe-area-inset-top)) 8px max(10px, env(safe-area-inset-bottom));
+    gap: 8px;
   }
   
   .card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 10px;
+    margin-bottom: 8px;
+  }
+  
+  .section {
+    padding: 12px 0;
+  }
+  
+  .grid, .grid-2col, .grid-3col {
+    gap: 10px;
+  }
+}
+
+/* Ensure all layout maintain vertical column at all screen sizes */
+@media (min-width: 1200px) {
+  .linktree-container {
+    max-width: 680px;
+  }
+  
+  .card {
+    width: 100%;
   }
   
   .card:hover {
     transform: translateY(-5px);
-    box-shadow: var(--term-glow-strong);
   }
   
   .section {
-    padding: var(--space-3xl) 0;
+    padding: var(--space-2xl) 0;
   }
   
   .section-header {
-    margin-bottom: var(--space-2xl);
+    margin-bottom: var(--space-xl);
   }
   
   .grid {
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+}
+
+@media (min-width: 1800px) {
+  .linktree-container {
+    max-width: 680px;
+  }
+  
+  .projects-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 680px;
+  }
+  
+  .section, .card, .profile-section {
+    max-width: 680px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .grid {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
   }
 }
 
 /* Ultra-wide screen optimizations */
 @media (min-width: 1800px) {
-  .linktree-container {
-    max-width: 1200px;
-    padding: 48px;
-    gap: 40px;
-    margin: 0 auto;
-  }
-  
   /* Adjust projects layout for ultra-wide screens - two column grid layout */
   .projects-container {
     display: grid;

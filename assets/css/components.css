@@ -87,11 +87,12 @@
   background: transparent;
   padding: var(--space-xs) var(--space-sm);
   border-radius: var(--border-radius-md);
-  border: 1px solid var(--term-cyan-dark);
+  border: 1px solid var(--term-cyan);
   display: flex;
   align-items: center;
   gap: var(--space-xs);
   transition: var(--transition-fast);
+  box-shadow: var(--term-glow);
 }
 
 .profile-tag i {
@@ -100,9 +101,9 @@
 }
 
 .profile-tag:hover {
-  background: rgba(0, 230, 255, 0.15);
-  transform: translateY(-2px);
-  box-shadow: var(--term-glow);
+  background-color: rgba(30, 144, 255, 0.2);
+  transform: scale(1.05);
+  box-shadow: var(--term-glow-strong);
 }
 
 /* Links Section */
@@ -474,229 +475,259 @@
 
 @media (max-width: 480px) {
   .profile-section {
-    margin-bottom: var(--space-xs);
-    max-width: 95%;
-    transform: scale(1);
-    padding: var(--space-xs);
-    /* Add padding for iOS safe areas */
-    padding-top: max(var(--space-xs), env(safe-area-inset-top));
-    padding-left: max(var(--space-xs), env(safe-area-inset-left));
-    padding-right: max(var(--space-xs), env(safe-area-inset-right));
-  }
-
-  .profile-image {
-    width: 60px;
-    height: 60px;
-    margin-bottom: var(--space-xs);
-  }
-
-  .profile-section h1 {
-    font-size: calc(var(--font-size-md) + 2px);
-    margin-bottom: 4px;
-  }
-
-  .profile-section .bio {
-    font-size: var(--font-size-sm);
-    margin-bottom: var(--space-xs);
-  }
-
-  .bio-description {
-    font-size: calc(var(--font-size-xs) + 1px);
-    margin-top: var(--space-xs);
-    padding: 0 var(--space-xs);
-  }
-
-  .profile-tags {
-    gap: 4px;
-    margin: var(--space-xs) 0;
-    transform: scale(1);
-  }
-  
-  .profile-tag {
-    padding: 4px 8px; /* Increased touch target size */
-    font-size: var(--font-size-xs);
-    /* Disable highlight color on tap for iOS */
-    -webkit-tap-highlight-color: transparent;
-  }
-  
-  .project-links {
-    flex-direction: row;
-    flex-wrap: wrap;
+    margin-bottom: var(--space-lg);
+    padding: var(--space-sm);
+    max-width: 100%;
+    width: 100%;
+    border-radius: var(--border-radius-md);
+    align-items: center;
+    justify-content: center;
     gap: 8px;
   }
   
+  .profile-image {
+    width: 80px;
+    height: 80px;
+    margin-bottom: var(--space-md);
+  }
+  
+  .profile-section h1 {
+    font-size: var(--font-size-lg);
+    margin-bottom: 4px;
+  }
+  
+  .profile-section .bio {
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--space-md);
+  }
+  
+  .bio-description {
+    font-size: var(--font-size-xs);
+    line-height: 1.4;
+    max-width: 100%;
+    margin: 0 auto var(--space-md);
+    padding: 0 var(--space-xs);
+    text-align: center;
+  }
+  
+  .profile-tags {
+    gap: 6px;
+    margin: var(--space-sm) 0;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .profile-tag {
+    font-size: 10px;
+    padding: 4px 8px;
+    border-radius: 12px;
+  }
+  
+  .project-links {
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+  }
+  
   .project-link {
-    padding: 8px 12px; /* Increased touch target size */
-    font-size: 13px;
-    /* Disable highlight color on tap for iOS */
-    -webkit-tap-highlight-color: transparent;
-    /* Add haptic touch effect */
-    touch-action: manipulation;
+    font-size: var(--font-size-xs);
+    padding: 6px 10px;
+    min-height: 32px;
+    border-radius: var(--border-radius-sm);
+    gap: 4px;
   }
   
   .project-link i {
+    font-size: 14px;
+  }
+  
+  .link-card {
+    padding: 12px;
+    min-height: 54px;
+    border-radius: var(--border-radius-md);
+    margin-bottom: 10px;
+    gap: 8px;
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: row;
+    text-align: left;
+  }
+  
+  .link-card i:first-child {
+    font-size: 18px;
+    min-width: 24px;
+    margin-right: 8px;
+  }
+  
+  .link-card span {
+    font-size: 14px;
+    flex: 1;
+  }
+  
+  .link-card i:last-child {
+    font-size: 14px;
+    margin-left: auto;
+    opacity: 0.7;
+  }
+  
+  .links-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .section-header {
+    margin-bottom: var(--space-md);
+    text-align: center;
+  }
+  
+  .section-header h1, .section-header h2 {
+    font-size: var(--font-size-lg);
+  }
+  
+  .section-header h2 {
+    font-size: var(--font-size-md);
+    margin-bottom: 0;
+  }
+  
+  .projects-section {
+    padding: var(--space-md) 0;
+  }
+  
+  .project-card {
+    padding: var(--space-sm);
+    margin-bottom: var(--space-md);
+  }
+  
+  .project-image {
+    height: 140px;
+    margin-bottom: var(--space-sm);
+  }
+  
+  .project-content {
+    padding: var(--space-xs);
+    gap: 6px;
+  }
+  
+  .project-title {
+    font-size: var(--font-size-md);
+    margin-bottom: 4px;
+    line-height: 1.3;
+  }
+  
+  .project-description {
+    font-size: var(--font-size-xs);
+    margin-bottom: var(--space-sm);
+    line-height: 1.4;
+    max-height: 80px;
+    overflow-y: auto;
+  }
+  
+  .project-tags {
+    gap: 4px;
+    margin-bottom: var(--space-sm);
+    flex-wrap: wrap;
+  }
+  
+  .project-tag {
+    font-size: 9px;
+    padding: 3px 6px;
+    border-radius: 10px;
+  }
+  
+  .project-links {
+    gap: 6px;
+    margin-top: var(--space-xs);
+  }
+  
+  .project-link {
+    font-size: 11px;
+    padding: 5px 8px;
+    min-height: 28px;
+    border-radius: 12px;
+  }
+  
+  /* Touch-friendly improvements */
+  .profile-section {
+    touch-action: manipulation;
+  }
+  
+  #contact-me {
+    min-height: 44px;
+    padding: 10px 16px;
+    margin-top: var(--space-sm);
+  }
+  
+  .contact-button:active,
+  .link-card:active,
+  .project-link:active,
+  .profile-tag:active {
+    transform: scale(0.97);
+    transition: transform 0.1s ease;
+  }
+  
+  .sidebar {
+    width: 85%;
+    max-width: 300px;
+  }
+  
+  .close-sidebar {
+    top: max(env(safe-area-inset-top), 10px);
+    right: 10px;
+    width: 36px;
+    height: 36px;
+    font-size: 18px;
+  }
+}
+
+/* Extra small device optimizations */
+@media (max-width: 360px) {
+  .profile-image {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .profile-section h1 {
+    font-size: 18px;
+  }
+  
+  .profile-section .bio {
     font-size: 12px;
   }
   
   .link-card {
-    /* Instead of scaling, adjust the size directly */
-    transform: none;
-    padding: var(--space-xxs) var(--space-xs);
-    margin: var(--space-xxs) 0;
-    min-height: 30px; /* Reduced height */
-    width: 50%; /* Half width */
-    margin-left: auto;
-    margin-right: auto;
-    /* Disable highlight color on tap for iOS */
-    -webkit-tap-highlight-color: transparent;
-    /* Add haptic touch effect */
-    touch-action: manipulation;
-    /* Ensure proper alignment */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    padding: 10px;
+    min-height: 48px;
   }
   
   .link-card i:first-child {
-    margin-right: var(--space-xxs);
-    min-width: 12px;
-    font-size: 10px; /* Smaller icon */
+    font-size: 16px;
   }
   
   .link-card span {
-    font-size: 10px; /* Smaller text */
-    padding: 0 var(--space-xxs);
+    font-size: 13px;
   }
   
-  .link-card i:last-child {
-    font-size: 8px; /* Smaller icon */
-    margin-left: var(--space-xxs);
-    min-width: 8px;
-  }
-  
-  .links-section {
-    width: 95%;
-    max-width: 95%;
-    transform: none; /* No transform */
-    gap: var(--space-xs);
-    padding: var(--space-xs);
-    /* Add padding for iOS safe areas */
-    padding-left: max(var(--space-xs), env(safe-area-inset-left));
-    padding-right: max(var(--space-xs), env(safe-area-inset-right));
-    padding-bottom: max(var(--space-sm), env(safe-area-inset-bottom));
-    /* Ensure proper alignment of children */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .section-header {
-    margin-bottom: var(--space-xs);
-    transform: scale(1);
-  }
-  
-  .section-header h1, .section-header h2 {
-    font-size: var(--font-size-md);
-  }
-  
-  .section-header h2 {
-    font-size: var(--font-size-md); /* Smaller font size */
-    margin-bottom: var(--space-sm);
-  }
-  
-  .projects-section {
-    margin-top: var(--space-xs);
-  }
-
-  .project-card {
-    padding: var(--space-xs);
-    margin-bottom: var(--space-xs);
-  }
-
-  /* Mobile project image styles */
   .project-image {
-    height: 140px;
-    margin-bottom: var(--space-xs);
+    height: 120px;
   }
-
-  .project-content {
-    height: calc(100% - 140px - var(--space-xs));
-    display: flex;
-    flex-direction: column;
-  }
-
+  
   .project-title {
     font-size: 16px;
-    margin-bottom: 4px;
-    line-height: 1.2;
   }
   
   .project-description {
-    font-size: 13px; /* Increased from 12px */
-    line-height: 1.3;
-    margin-bottom: 8px;
-    flex-grow: 0;
-    max-height: none;
-    overflow: visible;
-  }
-
-  .project-tags {
-    margin-bottom: 8px;
-    margin-top: 4px;
-    gap: 4px;
-  }
-  
-  .project-tag {
-    font-size: 12px; /* Increased from 10px */
-    padding: 4px 8px; /* Increased from 2px 6px */
-    margin-bottom: 2px;
-  }
-  
-  .project-links {
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 4px;
-  }
-  
-  .project-link {
-    padding: 8px 12px; /* Increased from 4px 10px */
-    font-size: 13px; /* Increased from 12px */
-  }
-  
-  /* iOS-specific adjustments */
-  @supports (-webkit-touch-callout: none) {
-    /* Adjust for iPhone notch */
-    .profile-section {
-      padding-top: max(var(--space-xs), env(safe-area-inset-top) + 8px);
-    }
-    
-    /* Adjust for iPhone home indicator */
-    #contact-me {
-      bottom: max(24px, env(safe-area-inset-bottom) + 8px);
-      padding: 10px 16px;
-      border-radius: 24px;
-    }
-    
-    /* Improve touch feedback */
-    .contact-button:active,
-    .link-card:active,
-    .project-link:active {
-      opacity: 0.7;
-      transition: opacity 0.1s ease;
-    }
-    
-    /* Ensure sidebar respects safe areas */
-    .sidebar {
-      padding-bottom: max(16px, env(safe-area-inset-bottom) + 16px);
-    }
-    
-    .close-sidebar {
-      top: max(env(safe-area-inset-top) + 8px, 16px);
-      right: max(env(safe-area-inset-right) + 8px, 16px);
-      width: 44px;
-      height: 44px;
-    }
+    font-size: 11px;
+    max-height: 70px;
   }
 }
 

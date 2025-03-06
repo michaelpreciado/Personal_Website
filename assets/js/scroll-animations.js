@@ -239,4 +239,45 @@ function animateTypingEffect(element) {
       }
     }
   }, 25); // Typing speed
+}
+
+// Function to animate elements on scroll
+function animateOnScroll() {
+  // Get all elements that need to be animated
+  const elementsToAnimate = document.querySelectorAll('.project-card:not(.animated), .bio:not(.animated), .bio-description:not(.animated), .project-title:not(.animated), .project-description:not(.animated), .link-card span:not(.animated)');
+  
+  // Process each element
+  elementsToAnimate.forEach(element => {
+    // Check if element is in viewport
+    if (isElementInViewport(element)) {
+      // Add animated class
+      element.classList.add('animated');
+      
+      // Make sure element is visible
+      element.style.visibility = 'visible';
+      element.style.opacity = '1';
+      
+      // Add fade-in animation
+      element.style.animation = 'fadeIn 0.5s ease forwards';
+    }
+  });
+  
+  // Use the profile tags handler if available
+  if (typeof window.ensureProfileTags === 'function') {
+    window.ensureProfileTags();
+  }
+}
+
+// Function to ensure all text is visible
+function ensureAllTextVisible() {
+  // Make all text elements visible
+  document.querySelectorAll('h1, h2, .bio, .bio-description, .project-title, .project-description, .link-card span').forEach(element => {
+    element.style.visibility = 'visible';
+    element.style.opacity = '1';
+  });
+  
+  // Use the profile tags handler if available
+  if (typeof window.ensureProfileTags === 'function') {
+    window.ensureProfileTags();
+  }
 } 

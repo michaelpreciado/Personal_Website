@@ -156,15 +156,22 @@ button {
     --space-md: 10px;
     --space-sm: 6px;
     --space-xs: 4px;
+    --font-size-2xl: 22px;
+    --font-size-xl: 20px;
+    --font-size-lg: 18px;
+    --font-size-md: 16px;
+    --font-size-sm: 14px;
+    --font-size-xs: 12px;
   }
   
   html, body {
     font-size: 14px;
     line-height: 1.4;
+    overflow-x: hidden;
   }
   
   body {
-    padding: calc(var(--safe-area-inset-top) + 10px) 
+    padding: calc(var(--safe-area-inset-top) + 44px) 
              var(--space-xs) 
              var(--safe-area-inset-bottom);
     overflow-x: hidden;
@@ -177,11 +184,13 @@ button {
   h1 {
     font-size: 20px;
     margin-bottom: 6px;
+    letter-spacing: 0.02em;
   }
   
   h2 {
     font-size: 18px;
     margin-bottom: 5px;
+    letter-spacing: 0.01em;
   }
   
   h3 {
@@ -197,8 +206,62 @@ button {
   
   .content-container {
     padding: 8px;
-    width: 95%;
-    max-width: 95%;
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  /* Improve touch targets */
+  a, button {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Reduce animations for better performance */
+  * {
+    transition-duration: 0.2s !important;
+  }
+}
+
+/* Small phones optimization */
+@media (max-width: 375px) {
+  :root {
+    --font-size-2xl: 20px;
+    --font-size-xl: 18px;
+    --font-size-lg: 16px;
+    --font-size-md: 14px;
+    --font-size-sm: 13px;
+    --font-size-xs: 11px;
+  }
+  
+  html, body {
+    font-size: 13px;
+  }
+  
+  h1 {
+    font-size: 18px;
+    margin-bottom: 5px;
+  }
+  
+  h2 {
+    font-size: 16px;
+    margin-bottom: 4px;
+  }
+  
+  h3 {
+    font-size: 15px;
+    margin-bottom: 3px;
+  }
+  
+  p {
+    font-size: 12px;
+    margin-bottom: 6px;
+    line-height: 1.25;
+  }
+  
+  .content-container {
+    padding: 6px;
   }
 }
 
