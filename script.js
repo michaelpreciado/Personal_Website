@@ -403,7 +403,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // Function to type text with animation
-const typeText = (element, text, speed = 50) => {
+const typeText = (element, text, speed = 20) => {
     if (!element || !text) return Promise.resolve();
     
     // Ensure element is visible
@@ -650,7 +650,7 @@ async function initTerminalAnimation() {
     
     // Type all text simultaneously with increased speed
     await Promise.all(textElements.map((element, index) => 
-        typeText(element, originalTexts[index], 10, Math.random() * 500) // Random start delay between 0-500ms
+        typeText(element, originalTexts[index], 5, Math.random() * 200) // Random start delay between 0-200ms
     ));
     
     // Function to apply random glitch effect with larger delay
@@ -678,8 +678,8 @@ async function initTerminalAnimation() {
     // Remove scan line faster
     setTimeout(() => {
         scanLine.style.opacity = '0';
-        setTimeout(() => scanLine.remove(), 300);
-    }, 800);
+        setTimeout(() => scanLine.remove(), 200);
+    }, 500);
 }
 
 // Function to apply random flicker effect with larger delay
@@ -1174,7 +1174,7 @@ function animateTextLetterByLetter() {
               element.style.opacity = '1';
             }
           }, delay);
-          delay += 15; // Adjust speed here
+          delay += 5; // Adjust speed here
         }
       });
     } else {
@@ -1193,7 +1193,7 @@ function animateTextLetterByLetter() {
             element.setAttribute('data-animating', 'false');
           }
         }, delay);
-        delay += 15; // Adjust speed here
+        delay += 5; // Adjust speed here
       }
     }
   });

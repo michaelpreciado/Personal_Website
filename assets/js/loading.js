@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
               }
             }
-          }, 50);
+          }, 20);
         }, totalDelay);
       });
       
@@ -104,8 +104,8 @@ document.addEventListener('DOMContentLoaded', function() {
           
           // Start the text typescript effect after loading is complete
           startTypescriptEffect();
-        }, 500);
-      }, totalDelay + 1200);
+        }, 300);
+      }, totalDelay + 800);
     } else {
       // Simpler loading for mobile
       setTimeout(() => {
@@ -115,8 +115,8 @@ document.addEventListener('DOMContentLoaded', function() {
           
           // Start the text typescript effect after loading is complete
           startTypescriptEffect();
-        }, 500);
-      }, 1500);
+        }, 300);
+      }, 1000);
     }
   }
 });
@@ -285,7 +285,7 @@ function animateTextLetterByLetter() {
               letterSpan.classList.add('letter-animated');
               letterSpan.style.animationDelay = `${delay}ms`;
               fragment.appendChild(letterSpan);
-              delay += 15; // Adjust speed here
+              delay += 5; // Adjust speed here
             }
             
             // Replace the text node with our animated spans
@@ -308,7 +308,7 @@ function animateTextLetterByLetter() {
         letterSpan.classList.add('letter-animated');
         letterSpan.style.animationDelay = `${delay}ms`;
         fragment.appendChild(letterSpan);
-        delay += 15; // Adjust speed here
+        delay += 5; // Adjust speed here
       }
       
       // Add all letters to the element
@@ -317,13 +317,13 @@ function animateTextLetterByLetter() {
       // Mark as complete after all animations
       setTimeout(() => {
         element.setAttribute('data-animating', 'false');
-      }, delay + 200); // Add a little extra time for the animation to complete
+      }, delay + 100); // Add a little extra time for the animation to complete
     }
   });
 }
 
 // Function to type text with animation
-function typeText(element, text, speed = 50) {
+function typeText(element, text, speed = 20) {
   let i = 0;
   element.textContent = '';
   
