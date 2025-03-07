@@ -1,5 +1,11 @@
 /* Initialize particles.js */
 document.addEventListener('DOMContentLoaded', function() {
+    // Fix for mobile viewport height
+    fixMobileViewportHeight();
+    
+    // Improve clickability of all interactive elements
+    improveClickability();
+    
     particlesJS("particles-js", {
         particles: {
             number: {
@@ -89,6 +95,9 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         retina_detect: true
     });
+    
+    // Re-apply clickability fix after any dynamic content loads
+    setTimeout(improveClickability, 1000);
 });
 
 /* Pip-Boy Particles Configuration */
@@ -1206,4 +1215,167 @@ function animateTextLetterByLetter() {
     });
   }, 500);
 }
+
+/* Fix for mobile viewport height, especially on iOS devices */
+function fixMobileViewportHeight() {
+    // First we get the viewport height and multiply it by 1% to get a value for a vh unit
+    const vh = window.innerHeight * 0.01;
+    // Then we set the value in the --vh custom property to the root of the document
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+    
+    // We listen to the resize event
+    window.addEventListener('resize', () => {
+        // We execute the same script as before
+        const vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+    });
+    
+    // Also update on orientation change
+    window.addEventListener('orientationchange', () => {
+        // Wait for the orientation change to complete
+        setTimeout(() => {
+            const vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+        }, 100);
+    });
+    
+    // Special handling for iOS devices
+    if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
+        // Prevent elastic scrolling/bounce effect
+        document.body.style.overscrollBehavior = 'none';
+        document.documentElement.style.overscrollBehavior = 'none';
+        
+        // Fix for iOS Safari address bar showing/hiding
+        window.addEventListener('scroll', () => {
+            // Debounce the scroll event
+            clearTimeout(window.scrollEndTimer);
+            window.scrollEndTimer = setTimeout(() => {
+                const vh = window.innerHeight * 0.01;
+                document.documentElement.style.setProperty('--vh', `${vh}px`);
+            }, 100);
+        });
+        
+        // Improve touch handling on iOS
+        improveIOSTouchHandling();
+    }
+}
+
+/* Improve touch handling specifically for iOS devices */
+function improveIOSTouchHandling() {
+    // Fix for iOS scrolling issues with interactive elements
+    document.addEventListener('touchstart', function(e) {
+        // Allow default touch behavior for form elements and links
+        if (e.target.tagName === 'INPUT' || 
+            e.target.tagName === 'TEXTAREA' || 
+            e.target.tagName === 'SELECT' || 
+            e.target.tagName === 'A' ||
+            e.target.closest('a') ||
+            e.target.closest('.interactive')) {
+            return;
+        }
+        
+        // For all other elements, prevent default touch behavior
+        // that might interfere with smooth scrolling
+        if (e.touches.length === 1) {
+            // Single touch - might be a scroll attempt
+            const touchStartY = e.touches[0].clientY;
+            
+            // Store the starting position
+            e.target.setAttribute('data-touch-start-y', touchStartY);
+        }
+    }, { passive: true });
+    
+    // Handle touch move for smoother scrolling
+    document.addEventListener('touchmove', function(e) {
+        // Skip if it's an interactive element
+        if (e.target.tagName === 'INPUT' || 
+            e.target.tagName === 'TEXTAREA' || 
+            e.target.tagName === 'SELECT' || 
+            e.target.tagName === 'A' ||
+            e.target.closest('a') ||
+            e.target.closest('.interactive')) {
+            return;
+        }
+        
+        // For single touch movements
+        if (e.touches.length === 1) {
+            const touchStartY = parseInt(e.target.getAttribute('data-touch-start-y') || '0');
+            const currentTouchY = e.touches[0].clientY;
+            const deltaY = currentTouchY - touchStartY;
+            
+            // If we're at the top of the page and trying to scroll down,
+            // or at the bottom and trying to scroll up, prevent the bounce effect
+            if ((window.scrollY <= 0 && deltaY > 0) || 
+                (window.scrollY + window.innerHeight >= document.body.scrollHeight && deltaY < 0)) {
+                e.preventDefault();
+            }
+        }
+    }, { passive: false });
+    
+    // Clean up after touch ends
+    document.addEventListener('touchend', function(e) {
+        if (e.target.hasAttribute('data-touch-start-y')) {
+            e.target.removeAttribute('data-touch-start-y');
+        }
+    }, { passive: true });
+}
+
+/* Improve touch handling for all clickable elements */
+function improveClickability() {
+  // Get all clickable elements
+  const clickableElements = document.querySelectorAll('a, button, .link-card, .project-link, .contact-button, .contact-item');
+  
+  // Ensure each element has proper event handling
+  clickableElements.forEach(element => {
+    // Add pointer cursor
+    element.style.cursor = 'pointer';
+    
+    // Enable pointer events
+    element.style.pointerEvents = 'auto';
+    
+    // Ensure z-index is high enough
+    const currentZIndex = parseInt(window.getComputedStyle(element).zIndex, 10);
+    if (isNaN(currentZIndex) || currentZIndex < 5) {
+      element.style.zIndex = '5';
+    }
+    
+    // Add touch action for mobile
+    element.style.touchAction = 'manipulation';
+    
+    // Add tap highlight color for mobile feedback
+    element.style.webkitTapHighlightColor = 'rgba(0, 230, 255, 0.3)';
+    
+    // Add click event listener if not already present
+    if (!element._hasClickListener) {
+      element.addEventListener('click', function(e) {
+        // For anchor tags with href, let the default behavior handle it
+        if (element.tagName === 'A' && element.getAttribute('href')) {
+          return;
+        }
+        
+        // For buttons with onclick, let the default behavior handle it
+        if (element.tagName === 'BUTTON' && element.getAttribute('onclick')) {
+          return;
+        }
+        
+        // Check if this is a link-card
+        if (element.classList.contains('link-card')) {
+          const linkHref = element.getAttribute('href');
+          if (linkHref) {
+            window.open(linkHref, '_blank', 'noopener,noreferrer');
+          }
+        }
+        
+        e.stopPropagation();
+      }, { passive: false });
+      
+      element._hasClickListener = true;
+    }
+  });
+}
+
+// Also call the fix when window resizes (may reveal/hide elements)
+window.addEventListener('resize', function() {
+  improveClickability();
+});
 

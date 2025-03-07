@@ -148,7 +148,7 @@ function setupRandomGlitches() {
 
 // Setup sidebar functionality
 function setupSidebar() {
-  const sidebarToggle = document.querySelector('.contact-button');
+  const sidebarToggle = document.getElementById('contact-me');
   const sidebar = document.getElementById('sidebar');
   const closeButton = document.querySelector('.close-sidebar');
   
@@ -163,12 +163,17 @@ function setupSidebar() {
       sidebar.classList.remove('active');
       body.classList.remove('sidebar-open');
       
+      // Add closing animation
+      sidebar.style.transition = 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease';
+      sidebar.style.opacity = '0';
+      
       // Re-enable scrolling after animation
       setTimeout(() => {
         body.style.position = '';
         body.style.width = '';
         body.style.top = '';
         window.scrollTo(0, parseInt(body.style.top || '0') * -1);
+        sidebar.style.opacity = ''; // Reset opacity
       }, 300);
     } else {
       // Opening sidebar - Store current scroll position
@@ -176,8 +181,32 @@ function setupSidebar() {
       body.style.position = 'fixed';
       body.style.width = '100%';
       body.style.top = `-${scrollY}px`;
+      
+      // Add opening animation
+      sidebar.style.transition = 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease';
+      sidebar.style.opacity = '0';
       sidebar.classList.add('active');
+      
+      // Trigger reflow to ensure animation works
+      void sidebar.offsetWidth;
+      
+      // Fade in
+      sidebar.style.opacity = '1';
       body.classList.add('sidebar-open');
+      
+      // Set focus to the sidebar for accessibility
+      setTimeout(() => {
+        sidebar.setAttribute('tabindex', '-1');
+        sidebar.focus();
+      }, 100);
+      
+      // Add animation to contact button
+      if (sidebarToggle) {
+        sidebarToggle.classList.add('clicked');
+        setTimeout(() => {
+          sidebarToggle.classList.remove('clicked');
+        }, 500);
+      }
     }
   };
   
@@ -217,6 +246,13 @@ function setupSidebar() {
         sidebar.classList.contains('active') && 
         !sidebar.contains(e.target) && 
         !(sidebarToggle && sidebarToggle.contains(e.target))) {
+      window.toggleSidebar();
+    }
+  });
+  
+  // Close sidebar with escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && sidebar && sidebar.classList.contains('active')) {
       window.toggleSidebar();
     }
   });

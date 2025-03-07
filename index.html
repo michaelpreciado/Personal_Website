@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#001215">
@@ -157,6 +157,11 @@
             visibility: hidden;
             opacity: 0;
             transition: visibility 0s, opacity 0.3s;
+        }
+        
+        .full-height {
+            height: 100vh;
+            height: 100dvh; /* dynamic viewport height */
         }
     </style>
     
@@ -336,44 +341,16 @@
             </div>
             
             <div class="projects-container">
-                <!-- Neural Network Project -->
-                <article class="project-card">
-                    <div class="coming-soon-badge">Coming Soon</div>
-                    <div class="project-image">
-                        <img src="https://placehold.co/600x400/001621/00e6ff?text=Neural+Network+Visualizer" 
-                             alt="Neural Network Visualizer" 
-                             loading="lazy"
-                             onerror="this.onerror=null; this.src='https://placehold.co/600x400/001621/00e6ff?text=Neural+Network+Visualizer'; this.classList.add('fallback-image');">
-                    </div>
-                    <div class="project-content">
-                        <h2 class="project-title">Visual Neural Network</h2>
-                        <p class="project-description">Interactive tool for neural network visualization.</p>
-                        <div class="project-tags">
-                            <span class="project-tag">D3.js</span>
-                            <span class="project-tag">TensorFlow.js</span>
-                            <span class="project-tag">Neural Networks</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://github.com/michaelpreciado/Neural_Network_Visualizer" class="project-link" target="_blank">
-                                <i class="fab fa-github"></i>
-                                <span>View Code</span>
-                            </a>
-                            <a href="#" class="project-link">
-                                <i class="fas fa-external-link-alt"></i>
-                                <span>Live Demo</span>
-                            </a>
-                        </div>
-                    </div>
-                </article>
-
                 <!-- Photography Portfolio -->
-                <article class="project-card">
-                    <div class="coming-soon-badge">Coming Soon</div>
+                <article class="project-card animated-card">
                     <div class="project-image">
-                        <img src="https://placehold.co/600x400/001621/00e6ff?text=Photography+Portfolio" 
+                        <img src="./public/photography.jpg" 
                              alt="Photography Portfolio" 
                              loading="lazy"
                              onerror="this.onerror=null; this.src='https://placehold.co/600x400/001621/00e6ff?text=Photography+Portfolio'; this.classList.add('fallback-image');">
+                        <div class="project-icon">
+                            <i class="fas fa-camera"></i>
+                        </div>
                     </div>
                     <div class="project-content">
                         <h2 class="project-title">Photography Portfolio</h2>
@@ -383,12 +360,12 @@
                             <span class="project-tag">Next.js</span>
                             <span class="project-tag">Framer Motion</span>
                         </div>
-                        <div class="project-links">
+                        <div class="project-links animated-links">
                             <a href="https://github.com/michaelpreciado/mario.preciado.photography" class="project-link" target="_blank">
                                 <i class="fab fa-github"></i>
                                 <span>View Code</span>
                             </a>
-                            <a href="https://michaelpreciado.github.io/mario.preciado.photography/" class="project-link">
+                            <a href="https://michaelpreciado.github.io/mario.preciado.photography/" class="project-link" target="_blank">
                                 <i class="fas fa-external-link-alt"></i>
                                 <span>Live Demo</span>
                             </a>
@@ -396,31 +373,33 @@
                     </div>
                 </article>
                 
-                <!-- AI Chatbot -->
-                <article class="project-card">
-                    <div class="coming-soon-badge">Coming Soon</div>
+                <!-- Neural Network Visualizer -->
+                <article class="project-card animated-card">
                     <div class="project-image">
-                        <img src="https://placehold.co/600x400/001621/00e6ff?text=AI+Chatbot" 
-                             alt="AI Chatbot" 
+                        <img src="./public/neural-network.jpg" 
+                             alt="Neural Network Visualizer" 
                              loading="lazy"
-                             onerror="this.onerror=null; this.src='https://placehold.co/600x400/001621/00e6ff?text=AI+Chatbot'; this.classList.add('fallback-image');">
+                             onerror="this.onerror=null; this.src='https://placehold.co/600x400/001621/00e6ff?text=Neural+Network+Visualizer'; this.classList.add('fallback-image');">
+                        <div class="project-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
                     </div>
                     <div class="project-content">
-                        <h2 class="project-title">AI Chatbot</h2>
-                        <p class="project-description">Conversational AI assistant with natural language processing capabilities.</p>
+                        <h2 class="project-title">Neural Network Visualizer</h2>
+                        <p class="project-description">Interactive visualization tool for neural networks with real-time training and parameter adjustments.</p>
                         <div class="project-tags">
-                            <span class="project-tag">Python</span>
-                            <span class="project-tag">NLP</span>
-                            <span class="project-tag">Machine Learning</span>
+                            <span class="project-tag">TensorFlow.js</span>
+                            <span class="project-tag">D3.js</span>
+                            <span class="project-tag">WebGL</span>
                         </div>
-                        <div class="project-links">
-                            <a href="#" class="project-link" target="_blank">
+                        <div class="project-links animated-links">
+                            <a href="https://github.com/michaelpreciado/Interactive_Neural_Network" class="project-link" target="_blank">
                                 <i class="fab fa-github"></i>
-                                <span>Code</span>
+                                <span>View Code</span>
                             </a>
-                            <a href="#" class="project-link">
+                            <a href="https://michaelpreciado.github.io/Interactive_Neural_Network/" class="project-link" target="_blank">
                                 <i class="fas fa-external-link-alt"></i>
-                                <span>Demo</span>
+                                <span>Live Demo</span>
                             </a>
                         </div>
                     </div>
@@ -457,6 +436,18 @@
                         <i class="fas fa-envelope"></i>
                         <span>mpreciado1997@gmail.com</span>
                     </a>
+                    <a href="https://www.linkedin.com/feed/" target="_blank" rel="noopener noreferrer" class="contact-item">
+                        <i class="fab fa-linkedin"></i>
+                        <span>LinkedIn</span>
+                    </a>
+                    <a href="https://github.com/michaelpreciado" target="_blank" rel="noopener noreferrer" class="contact-item">
+                        <i class="fab fa-github"></i>
+                        <span>GitHub</span>
+                    </a>
+                    <a href="https://x.com/mpdollars" target="_blank" rel="noopener noreferrer" class="contact-item">
+                        <i class="fa-brands fa-x-twitter"></i>
+                        <span>X (Twitter)</span>
+                    </a>
                 </div>
                 <div class="location-info">
                     <p><i class="fas fa-map-marker-alt"></i> California, United States</p>
@@ -476,6 +467,77 @@
     <script src="assets/js/profile-tags.js"></script>
     <script src="assets/js/index.js"></script>
     <script src="assets/js/scroll-animations.js"></script>
+    
+    <!-- Fix for clickable project links -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // Fix project links clickability
+        const projectLinks = document.querySelectorAll('.project-link');
+        projectLinks.forEach(link => {
+          // Remove any event listeners that might be interfering
+          const newLink = link.cloneNode(true);
+          link.parentNode.replaceChild(newLink, link);
+          
+          // Ensure link has proper styling for clickability
+          newLink.style.cursor = 'pointer';
+          newLink.style.pointerEvents = 'auto';
+          newLink.style.position = 'relative';
+          newLink.style.zIndex = '10';
+          
+          // Add explicit click handler that navigates to the link
+          newLink.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const href = this.getAttribute('href');
+            if (href) {
+              window.open(href, '_blank');
+            }
+          });
+          
+          // Touch handling for mobile
+          newLink.addEventListener('touchend', function(e) {
+            e.preventDefault();
+            const href = this.getAttribute('href');
+            if (href) {
+              window.open(href, '_blank');
+            }
+          });
+        });
+
+        // Project card animations
+        const animatedCards = document.querySelectorAll('.animated-card');
+        
+        // Function to check if element is in viewport
+        function isElementInViewport(el) {
+          const rect = el.getBoundingClientRect();
+          return (
+            rect.top >= 0 &&
+            rect.left >= 0 &&
+            rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+            rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+          );
+        }
+        
+        // Function to handle animations when scrolling
+        function handleScrollAnimations() {
+          animatedCards.forEach(card => {
+            if (isElementInViewport(card)) {
+              card.classList.add('in-view');
+            }
+          });
+        }
+        
+        // Initialize animations
+        handleScrollAnimations();
+        
+        // Listen for scroll events
+        window.addEventListener('scroll', handleScrollAnimations);
+        
+        // Add staggered animation delays
+        animatedCards.forEach((card, index) => {
+          card.style.transitionDelay = `${index * 0.1}s`;
+        });
+      });
+    </script>
     
     <!-- Responsive layout script -->
     <script>
@@ -517,7 +579,20 @@
         
         // Run on load and resize
         window.addEventListener('load', optimizeForScreenSize);
-        window.addEventListener('resize', optimizeForScreenSize);
+        
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+        
+        window.addEventListener('resize', debounce(optimizeForScreenSize, 150));
     </script>
     
     <!-- iOS Optimizations -->

@@ -12,6 +12,10 @@ html {
   height: 100%;
   height: -webkit-fill-available;
   font-size: 16px;
+  /* Add overscroll behavior for better iOS scrolling */
+  -webkit-overflow-scrolling: touch;
+  /* Prevent elastic bounce on iOS */
+  overscroll-behavior: none;
 }
 
 body {
@@ -19,7 +23,8 @@ body {
   line-height: var(--line-height);
   color: var(--term-text);
   background-color: var(--term-bg);
-  min-height: 100vh;
+  min-height: 100vh; /* Fallback for browsers that do not support Custom Properties */
+  min-height: calc(var(--vh, 1vh) * 100);
   min-height: -webkit-fill-available;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
@@ -30,6 +35,10 @@ body {
   -webkit-tap-highlight-color: transparent;
   position: relative;
   z-index: 1;
+  /* Improve scrolling on iOS */
+  -webkit-overflow-scrolling: touch;
+  /* Prevent elastic bounce on iOS */
+  overscroll-behavior-y: none;
 }
 
 /* Typography */
@@ -130,10 +139,23 @@ button {
 @supports (-webkit-touch-callout: none) {
   body {
     min-height: -webkit-fill-available;
-    padding-top: env(safe-area-inset-top);
-    padding-bottom: env(safe-area-inset-bottom);
-    padding-left: env(safe-area-inset-left);
-    padding-right: env(safe-area-inset-right);
+    min-height: calc(var(--vh, 1vh) * 100);
+    /* Use env() variables for safe area insets */
+    padding-top: max(calc(60px), env(safe-area-inset-top));
+    padding-bottom: max(var(--space-md), env(safe-area-inset-bottom));
+    padding-left: max(var(--space-md), env(safe-area-inset-left));
+    padding-right: max(var(--space-md), env(safe-area-inset-right));
+    /* Fix for iOS momentum scrolling */
+    -webkit-overflow-scrolling: touch;
+    /* Prevent rubber-banding/bounce effect */
+    overscroll-behavior-y: none;
+  }
+  
+  /* Fix for 100vh issue on iOS */
+  .full-height {
+    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
+    height: -webkit-fill-available;
   }
 }
 
@@ -168,6 +190,10 @@ button {
     font-size: 14px;
     line-height: 1.4;
     overflow-x: hidden;
+    /* Improve scrolling on mobile */
+    -webkit-overflow-scrolling: touch;
+    /* Prevent elastic bounce effect */
+    overscroll-behavior-y: none;
   }
   
   body {
@@ -179,6 +205,8 @@ button {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
+    /* Ensure content doesn't get cut off at the bottom */
+    padding-bottom: max(var(--space-md), env(safe-area-inset-bottom));
   }
   
   h1 {

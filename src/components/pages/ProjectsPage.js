@@ -51,16 +51,6 @@ const projects = [
   },
   {
     id: 3,
-    title: "AI-Powered Project",
-    description: "An exciting new project leveraging artificial intelligence and machine learning technologies. Stay tuned for more details!",
-    icon: faCode,
-    bgColor: "rgba(0, 214, 255, 0.15)",
-    bgPattern: backgroundPatterns.circuit,
-    links: [],
-    isComingSoon: true
-  },
-  {
-    id: 4,
     title: "Mobile App Development",
     description: "A cross-platform mobile application focused on enhancing user productivity and daily workflow management.",
     icon: faMobile,
@@ -70,7 +60,7 @@ const projects = [
     isComingSoon: true
   },
   {
-    id: 5,
+    id: 4,
     title: "Data Analytics Dashboard",
     description: "A comprehensive data visualization platform providing real-time insights and interactive analytics tools.",
     icon: faDatabase,

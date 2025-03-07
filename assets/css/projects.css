@@ -262,22 +262,23 @@
 
 /* Project Icons */
 .project-icon {
-  font-size: 24px; /* This will be scaled down with the card */
+  font-size: 24px;
   color: var(--term-cyan-bright);
-  margin-bottom: 12px;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: rgba(0, 230, 255, 0.05);
+  background: rgba(0, 10, 16, 0.8);
   border: 1px solid var(--term-cyan-dark);
-  position: relative;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
   overflow: hidden;
   transition: all 0.3s ease;
   animation: iconPulse 3s infinite ease-in-out;
-  /* No need to scale here as the entire card is already scaled */
 }
 
 @keyframes iconPulse {
@@ -404,7 +405,8 @@
     font-size: 20px;
     width: 50px;
     height: 50px;
-    margin-bottom: 10px;
+    top: 8px;
+    right: 8px;
   }
 }
 
@@ -543,6 +545,9 @@
   .project-icon {
     animation: none !important;
     transition: none !important;
+    position: absolute;
+    top: 10px;
+    right: 10px;
   }
   
   .project-icon i {

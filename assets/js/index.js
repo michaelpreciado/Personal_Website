@@ -288,11 +288,9 @@ document.addEventListener('DOMContentLoaded', function() {
   // Show/hide back to top button based on scroll position
   window.addEventListener('scroll', function() {
     if (window.scrollY > 300) {
-      backToTopButton.style.opacity = '1';
-      backToTopButton.style.pointerEvents = 'auto';
+      backToTopButton.classList.add('visible');
     } else {
-      backToTopButton.style.opacity = '0';
-      backToTopButton.style.pointerEvents = 'none';
+      backToTopButton.classList.remove('visible');
     }
   });
 });

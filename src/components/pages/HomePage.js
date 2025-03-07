@@ -209,11 +209,19 @@ const ProfileCard = styled.div`
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
     width: 350px;
     height: 220px;
+    margin-left: 45px; /* Offset to account for centered social links */
   }
   
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     width: 300px;
     height: 190px;
+    margin-left: 40px; /* Offset to account for centered social links */
+  }
+  
+  @media (max-width: 375px) {
+    width: 280px;
+    height: 180px;
+    margin-left: 35px; /* Offset to account for centered social links */
   }
   
   /* Improved touch feedback */
@@ -395,10 +403,20 @@ const SocialLinks = styled.div`
   
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
     width: 90px;
+    left: 50%;
+    transform: translateX(-50%) translateX(-45px); /* Adjust for card offset */
   }
   
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     width: 80px;
+    left: 50%;
+    transform: translateX(-50%) translateX(-40px); /* Adjust for card offset */
+  }
+  
+  @media (max-width: 375px) {
+    width: 70px;
+    left: 50%;
+    transform: translateX(-50%) translateX(-35px); /* Adjust for card offset */
   }
 `;
 
@@ -481,14 +499,22 @@ const SocialLink = styled.a`
   @media (max-width: ${({ theme }) => theme.breakpoints.md}) {
     svg {
       padding: 12px;
-      font-size: 30px;
+      font-size: 28px;
     }
   }
   
   @media (max-width: ${({ theme }) => theme.breakpoints.sm}) {
     svg {
-      padding: 10px;
-      font-size: 25px;
+      padding: 8px;
+      font-size: 22px;
+    }
+  }
+  
+  /* Extra small screens */
+  @media (max-width: 375px) {
+    svg {
+      padding: 6px;
+      font-size: 20px;
     }
   }
   

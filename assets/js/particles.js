@@ -11,7 +11,7 @@ const isUltraWide = window.matchMedia('(min-width: 1800px)').matches;
 const desktopConfig = {
   particles: {
     number: {
-      value: 180,
+      value: 100,
       density: {
         enable: true,
         value_area: 1200
@@ -106,7 +106,7 @@ const desktopConfig = {
 const mobileConfig = {
   particles: {
     number: {
-      value: 80,
+      value: 40,
       density: {
         enable: true,
         value_area: 800
@@ -164,7 +164,7 @@ const mobileConfig = {
 const ultraWideConfig = {
   particles: {
     number: {
-      value: 220,
+      value: 120,
       density: {
         enable: true,
         value_area: 1800
@@ -259,7 +259,7 @@ const ultraWideConfig = {
 const superUltraWideConfig = {
   particles: {
     number: {
-      value: 300, // More particles for wider screens
+      value: 150,
       density: {
         enable: true,
         value_area: 2400 // Larger area for better distribution
