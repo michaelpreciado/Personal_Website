@@ -683,279 +683,63 @@ body.sidebar-open {
     }
 }
 
-/* Mobile adjustments */
+/* Improved Mobile Sidebar */
 @media (max-width: 480px) {
     .sidebar {
-        width: 85%;
-        max-width: 300px;
-        right: -85%;
-        top: 0;
-        padding: 1.5rem;
+        width: 85%; /* Reduce width on mobile */
+        max-width: 320px; /* Set a maximum width */
+        right: -100%; /* Start fully off-screen */
+        z-index: 1000; /* Ensure it's above other content */
     }
     
     .sidebar.active {
         right: 0;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5); /* Add shadow for depth */
     }
     
-    .main-header {
-        height: 60px;
-        padding: 0 var(--space-sm);
+    .sidebar-content {
+        padding: 20px 16px; /* Reduce padding */
+        height: 100%;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
     }
     
-    .hamburger-menu {
-        position: fixed;
-        bottom: var(--space-md);
-        right: var(--space-md);
-        top: auto;
-        border-radius: 50%;
-        width: 56px;
-        height: 56px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    .contact-section {
+        padding-top: 40px; /* Reduce top padding */
     }
     
-    .back-to-home {
-        position: fixed;
-        bottom: var(--space-md);
-        left: var(--space-md);
+    .contact-section h2 {
+        font-size: 1.2rem; /* Smaller heading */
+        margin-bottom: 16px;
     }
-
+    
     .contact-item {
-        padding: 0.8rem;
-    }
-}
-
-/* Prevent body scroll when sidebar is open */
-body.sidebar-open {
-    overflow: hidden;
-}
-
-/* Optimize backdrop blur performance */
-@supports (backdrop-filter: blur(10px)) {
-    .sidebar {
-        background: rgba(0, 18, 21, 0.85);
-        backdrop-filter: blur(10px);
-    }
-}
-
-.back-to-home {
-    /* Ensure link remains clickable */
-    position: relative;
-    z-index: 1002;
-    text-decoration: none !important;
-}
-
-.back-to-home span {
-    display: inline !important; /* Force show text label */
-}
-
-@media (max-width: 480px) {
-    .back-to-home span {
-        display: none !important; /* Hide text on smallest screens */
-    }
-    .back-to-home i {
-        margin-right: 0;
-    }
-}
-
-/* Mobile-optimized header buttons */
-.hamburger-menu, .back-to-home {
-    padding: 12px 16px;
-    min-width: 48px;
-    min-height: 48px;
-    border-radius: 8px;
-    font-size: 1rem;
-    gap: 8px;
-    border: 1px solid var(--term-cyan-dark);
-    background: rgba(0, 230, 255, 0.1);
-    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    margin: 8px;
-    position: relative;
-    z-index: 1000;
-}
-
-.hamburger-menu i, .back-to-home i {
-    font-size: 1.5rem;
-}
-
-.hamburger-menu span, .back-to-home span {
-    font-size: 1rem;
-    font-weight: 500;
-}
-
-/* Touch feedback */
-.hamburger-menu:active, .back-to-home:active {
-    transform: scale(0.95);
-    background: rgba(0, 230, 255, 0.2);
-}
-
-/* Mobile-first positioning */
-.header-content {
-    display: flex;
-    justify-content: space-between;
-    padding: 8px;
-    width: 100%;
-}
-
-/* Icon visibility */
-.hamburger-menu i, .back-to-home i {
-    filter: drop-shadow(0 0 2px var(--term-cyan));
-}
-
-@media (max-width: 480px) {
-    .hamburger-menu span, .back-to-home span {
-        display: none;
+        padding: 10px 12px; /* Smaller padding */
+        min-height: 40px; /* Smaller height */
+        font-size: 0.9rem; /* Smaller font */
     }
     
-    .hamburger-menu, .back-to-home {
-        padding: 10px;
-        min-width: 44px;
-        min-height: 44px;
-        margin: 4px;
+    .close-sidebar {
+        top: 12px;
+        right: 12px;
+        width: 36px;
+        height: 36px;
     }
     
-    .hamburger-menu i, .back-to-home i {
-        font-size: 1.3rem;
-        margin: 0;
+    /* Fix for iOS touch handling */
+    body.sidebar-open {
+        position: fixed;
+        width: 100%;
+        overflow: hidden;
     }
-}
-
-.hamburger-menu, 
-.back-to-home {
-  position: fixed;
-  bottom: var(--space-md);
-  width: 56px;
-  height: 56px;
-  padding: 0;
-  display: grid;
-  place-items: center;
-}
-
-.hamburger-menu { right: var(--space-md); }
-.back-to-home { left: var(--space-md); }
-
-/* Hide scrollbar when not scrolling */
-.sidebar::-webkit-scrollbar {
-    width: 0;
-    background: transparent;
 }
 
 /* iPhone Optimizations */
 @supports (-webkit-touch-callout: none) {
     .sidebar {
-        height: -webkit-fill-available;
-        padding-top: max(2rem, env(safe-area-inset-top));
-        padding-bottom: max(2rem, env(safe-area-inset-bottom));
-        padding-right: env(safe-area-inset-right);
-        padding-left: env(safe-area-inset-left);
-    }
-
-    .main-header {
         padding-top: env(safe-area-inset-top);
-        height: calc(60px + env(safe-area-inset-top));
-    }
-
-    .close-sidebar {
-        top: max(1rem, env(safe-area-inset-top));
-        right: max(1rem, env(safe-area-inset-right));
-    }
-
-    .hamburger-menu {
-        top: max(0.5rem, env(safe-area-inset-top));
-        right: max(0.5rem, env(safe-area-inset-right));
-    }
-
-    .back-to-home {
-        top: max(0.5rem, env(safe-area-inset-top));
-        left: max(0.5rem, env(safe-area-inset-left));
-    }
-}
-
-/* Improved Mobile Styles */
-@media (max-width: 480px) {
-    .sidebar {
-        width: 100%;
-        max-width: 100%;
-        background: rgba(0, 18, 21, 0.98);
-    }
-
-    .sidebar-content {
-        padding: calc(env(safe-area-inset-top) + 4rem) 1rem env(safe-area-inset-bottom);
-    }
-
-    .contact-item {
-        min-height: 44px;
-        padding: 0.8rem 1rem;
-        margin: 0.3rem 0;
-        border-radius: 12px;
-        -webkit-touch-callout: none;
-        font-size: 1rem;
-    }
-
-    .contact-item:active {
-        transform: scale(0.98);
-        transition: transform 0.1s ease;
-    }
-
-    .contact-section h2 {
-        margin-bottom: 1.2rem;
-        font-size: 1.4rem;
-    }
-
-    .hamburger-menu,
-    .back-to-home,
-    .close-sidebar {
-        width: 50px;
-        height: 50px;
-        border-radius: 12px;
-        background: rgba(0, 18, 21, 0.95);
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
-        border: 1.5px solid var(--term-cyan);
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-    }
-
-    .hamburger-menu i,
-    .back-to-home i,
-    .close-sidebar i {
-        font-size: 1.3rem;
-        color: var(--term-cyan);
-    }
-
-    /* Notch Area Spacing */
-    @supports (padding-top: env(safe-area-inset-top)) {
-        .main-header {
-            padding-top: env(safe-area-inset-top);
-        }
-
-        .sidebar-content {
-            padding-top: calc(env(safe-area-inset-top) + 3rem);
-        }
-    }
-
-    /* Better Touch Feedback */
-    .contact-item:active,
-    .hamburger-menu:active,
-    .back-to-home:active,
-    .close-sidebar:active {
-        transform: scale(0.96);
-        background: rgba(0, 230, 255, 0.15);
-        transition: all 0.1s ease;
-    }
-
-    /* Momentum Scrolling */
-    .sidebar {
-        overflow-y: scroll;
-        -webkit-overflow-scrolling: touch;
-        overscroll-behavior: contain;
-    }
-
-    /* Prevent Text Selection */
-    .contact-item,
-    .hamburger-menu,
-    .back-to-home,
-    .close-sidebar {
-        -webkit-user-select: none;
-        user-select: none;
+        padding-bottom: env(safe-area-inset-bottom);
+        height: calc(100vh - env(safe-area-inset-top));
     }
 }
 
@@ -982,4 +766,5 @@ body.sidebar-open {
         padding-bottom: env(safe-area-inset-bottom);
         height: calc(100vh - env(safe-area-inset-top));
     }
+} 
 } 

@@ -802,6 +802,20 @@ function toggleSidebar() {
         body.style.top = `-${scrollY}px`;
         sidebar.classList.add('active');
         body.classList.add('sidebar-open');
+        
+        // On mobile, ensure the sidebar is fully visible
+        if (window.innerWidth <= 480) {
+            // Scroll to top of sidebar content
+            const sidebarContent = sidebar.querySelector('.sidebar-content');
+            if (sidebarContent) {
+                sidebarContent.scrollTop = 0;
+            }
+            
+            // Ensure the sidebar is properly positioned for iOS
+            if (/iPhone|iPad|iPod/.test(navigator.userAgent)) {
+                sidebar.style.height = `${window.innerHeight}px`;
+            }
+        }
     }
 }
 
@@ -810,30 +824,38 @@ document.addEventListener('DOMContentLoaded', () => {
     const sidebar = document.getElementById('sidebar');
     const sidebarContent = sidebar.querySelector('.sidebar-content');
     let touchStartY = 0;
+    let touchStartX = 0;
     let touchStartTime = 0;
     let isSwiping = false;
     
     // Prevent default touch events on iOS
     sidebar.addEventListener('touchstart', (e) => {
         touchStartY = e.touches[0].clientY;
+        touchStartX = e.touches[0].clientX;
         touchStartTime = Date.now();
         isSwiping = false;
     }, { passive: true });
     
     sidebar.addEventListener('touchmove', (e) => {
-        if (!isSwiping) {
-            const touchY = e.touches[0].clientY;
-            const deltaY = touchStartY - touchY;
+        const touchY = e.touches[0].clientY;
+        const touchX = e.touches[0].clientX;
+        const deltaY = touchStartY - touchY;
+        const deltaX = touchStartX - touchX;
+        
+        // Check if user is swiping horizontally to close (right to left)
+        if (Math.abs(deltaX) > 30 && deltaX < 0 && Math.abs(deltaX) > Math.abs(deltaY)) {
+            isSwiping = true;
+            // Allow the swipe to happen naturally
+            return;
+        }
+        
+        // Only prevent default if scrolling at boundaries to allow normal scrolling
+        if (!isSwiping && sidebarContent) {
+            const isAtTop = sidebarContent.scrollTop <= 0;
+            const isAtBottom = Math.abs(sidebarContent.scrollHeight - sidebarContent.scrollTop - sidebarContent.clientHeight) < 1;
             
-            // Only prevent default if scrolling at boundaries
-            if ((deltaY > 0 && sidebarContent.scrollTop === 0) ||
-                (deltaY < 0 && sidebarContent.scrollHeight - sidebarContent.scrollTop === sidebarContent.clientHeight)) {
+            if ((deltaY > 0 && isAtTop) || (deltaY < 0 && isAtBottom)) {
                 e.preventDefault();
-            }
-            
-            // Check if user is swiping horizontally to close
-            if (Math.abs(e.touches[0].clientX - touchStartY) > 30) {
-                isSwiping = true;
             }
         }
     }, { passive: false });
@@ -842,11 +864,27 @@ document.addEventListener('DOMContentLoaded', () => {
         const touchEndTime = Date.now();
         const touchDuration = touchEndTime - touchStartTime;
         
-        // Close sidebar on quick swipe
-        if (isSwiping && touchDuration < 250) {
+        // Close sidebar on quick swipe from right to left
+        if (isSwiping && touchDuration < 300) {
             toggleSidebar();
         }
     }, { passive: true });
+    
+    // Close sidebar when clicking outside
+    document.addEventListener('click', (e) => {
+        if (sidebar.classList.contains('active') && 
+            !sidebar.contains(e.target) && 
+            !e.target.closest('#contact-me')) {
+            toggleSidebar();
+        }
+    });
+    
+    // Close sidebar with escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && sidebar.classList.contains('active')) {
+            toggleSidebar();
+        }
+    });
 });
 
 // iOS Safari height fix

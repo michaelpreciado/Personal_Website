@@ -1,0 +1,84 @@
+/* Mobile Sidebar Improvements */
+
+/* Improved Mobile Sidebar */
+@media (max-width: 480px) {
+    .sidebar {
+        width: 85%; /* Reduce width on mobile */
+        max-width: 320px; /* Set a maximum width */
+        right: -100%; /* Start fully off-screen */
+        z-index: 1000; /* Ensure it's above other content */
+    }
+    
+    .sidebar.active {
+        right: 0;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.5); /* Add shadow for depth */
+    }
+    
+    .sidebar-content {
+        padding: 20px 16px; /* Reduce padding */
+        height: 100%;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    }
+    
+    .contact-section {
+        padding-top: 40px; /* Reduce top padding */
+    }
+    
+    .contact-section h2 {
+        font-size: 1.2rem; /* Smaller heading */
+        margin-bottom: 16px;
+    }
+    
+    .contact-item {
+        padding: 10px 12px; /* Smaller padding */
+        min-height: 40px; /* Smaller height */
+        font-size: 0.9rem; /* Smaller font */
+    }
+    
+    .close-sidebar {
+        top: 12px;
+        right: 12px;
+        width: 36px;
+        height: 36px;
+    }
+    
+    /* Fix for iOS touch handling */
+    body.sidebar-open {
+        position: fixed;
+        width: 100%;
+        overflow: hidden;
+    }
+}
+
+/* iPhone Optimizations */
+@supports (-webkit-touch-callout: none) {
+    .sidebar {
+        padding-top: env(safe-area-inset-top);
+        padding-bottom: env(safe-area-inset-bottom);
+        height: calc(100vh - env(safe-area-inset-top));
+    }
+}
+
+/* Improved Touch Handling for Sidebar */
+.sidebar {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+}
+
+/* Prevent body scroll when sidebar is open */
+body.sidebar-open {
+    overflow: hidden;
+}
+
+/* Ensure sidebar content is scrollable */
+.sidebar-content {
+    overflow-y: auto;
+    height: 100%;
+}
+
+/* Ensure contact items are easy to tap */
+.contact-item {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+} 
